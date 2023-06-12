@@ -7,6 +7,10 @@ $_SESSION['table'] = 'users';
 
 $user = $_SESSION['user'];
 $response_message = '';
+
+$users = include('show_users.php');
+// var_dump($users);
+// die;
 ?>
 
 <!DOCTYPE html>
@@ -16,9 +20,11 @@ $response_message = '';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Inventory Manangement System</title>
     <link rel="stylesheet" href="css/user_add.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="css/user_add2.css">
+    
 </head>
 
 <body>
@@ -35,47 +41,104 @@ $response_message = '';
 
             <!-- container main -->
             <div class="container">
+
+
+
                 <div class="dashboard_content_main">
-                    <form action="users_add.php" method="POST" class="appForm">
-                        <div class="appFormInputContainer">
-                            <label for="first_name">First Name</label>
-                            <input type="text" id="first_name" name="first_name" class="appFormInput" />
+                    <div class="userAddFormContainer">
+
+                        here willfasdf
+                        <div class="dashboard_content">
+                            <div class="dashboard_content_main">
+                                <div class="row">
+                                    <div class="column-5">
+                                        <h1 class="section_header"><i class="fa fa-plus"></i> Create User</h1>
+                                        <div id="userAddFormContainer">
+
+                                        </div>
+                                    </div>
+                                    <div class="column-7">
+                                        <h1 class="section_header"><i class="fa fa-list"></i> List of Users</h1>
+                                        <div class="section_content">
+                                            <div class="users">
+                                                <table>
+                                                    <thead>
+
+                                                        <tr>
+                                                            <th>nu</th>
+                                                            <th>First Name</th>
+                                                            <th>Last Name</th>
+                                                            <th>Email</th>
+                                                            <th>Created At</th>
+                                                            <th>Upadated At</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <!-- table body of add users  -->
+                                                    <tbody>
+                                                        <?php foreach($users as $index=> $user){
+                                                            ?>
+                                                            <tr>
+                                                            <td><?= $index + 1 ?></td>
+                                                            <td><?= $user['first_name'] ?></td>
+                                                            <td><?= $user['last_name'] ?></td>
+                                                            <td><?= $user['email'] ?></td>
+                                                            <!-- set month day year using php  -->
+                                                            <td><?= date('M d, Y @ h:i:s A', strtotime($user['created_at'])) ?></td>
+                                                            <td><?= date('M d, Y @ h:i:s A', strtotime($user['updated_at'])) ?></td>
+                                                            
+                                                        </tr>
+                                                        <?php } ?>
+                                                    </tbody>
+                                                </table>
+                                                <p class="userCount"><?= count($users) ?> Users </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="appFormInputContainer">
-                            <label for="last_name">Last Name</label>
-                            <input type="text" id="last_name" name="last_name" class="appFormInput" />
-                        </div>
+                        <form action="add.php" method="POST" class="appForm">
+                            <div class="appFormInputContainer">
+                                <label for="first_name">First Name</label>
+                                <input type="text" id="first_name" name="first_name" class="appFormInput" />
+                            </div>
 
-                        <div class="appFormInputContainer">
-                            <label for="email">email</label>
-                            <input type="text" id="email" name="email" class="appFormInput" />
-                        </div>
+                            <div class="appFormInputContainer">
+                                <label for="last_name">Last Name</label>
+                                <input type="text" id="last_name" name="last_name" class="appFormInput" />
+                            </div>
 
-                        <div class="appFormInputContainer">
-                            <label for="password">password</label>
-                            <input type="password" id="password" name="password" class="appFormInput" />
-                        </div>
-                        
-                        <input type="hidden" name="table" value="users" />
-                        <button type="submit" class="appBtn"><i class="fa fa-plus"></i> Add User</button>
-                    </form>
+                            <div class="appFormInputContainer">
+                                <label for="email">email</label>
+                                <input type="text" id="email" name="email" class="appFormInput" />
+                            </div>
 
-                    <?php 
-                        if(isset($_SESSION['response'])){
-                            $response_message = $_SESSION['response']['message'];
-                            $is_success = $_SESSION['response']['success'];
-                        }
-                    ?>
+                            <div class="appFormInputContainer">
+                                <label for="password">password</label>
+                                <input type="password" id="password" name="password" class="appFormInput" />
+                            </div>
 
-                    <div class="responseMessage">
-                        <p class="<?= $is_success ? 'responseMessage_success' : 'responseMessage_error' ?>">
-                            <?= $response_message ?>
-                    </p>
+                            <input type="hidden" name="table" value="users" />
+                            <button type="submit" class="appBtn"><i class="fa fa-plus"></i> Add User</button>
+                        </form>
                     </div>
-
-                    <?php unset($_SESSION['response']); ?>
                 </div>
+                <?php
+                if (isset($_SESSION['response'])) {
+                    $response_message = $_SESSION['response']['message'];
+                    $is_success = $_SESSION['response']['success'];
+                }
+                ?>
+
+                <div class="responseMessage">
+                    <p class="<?= $is_success ? 'responseMessage_success' : 'responseMessage_error' ?>">
+                        <?= $response_message ?>
+                    </p>
+                </div>
+
+                <?php unset($_SESSION['response']); ?>
             </div>
 
         </div>
@@ -86,5 +149,12 @@ $response_message = '';
         ?>
     </div>
 </body>
+<script src="js/script.js"></script>
 
 </html>
+
+<!-- table create
+insert data
+use joins
+
+update schemas -->

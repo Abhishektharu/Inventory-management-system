@@ -24,7 +24,7 @@
             $conn->exec($command);
             $response = [
                 'success' => true,
-                'message' => $first_name . ' ' .$last_name . 'successfully added to the system'
+                'message' => $first_name . ' ' .$last_name . ' successfully added to the system.'
             ];
         }
 

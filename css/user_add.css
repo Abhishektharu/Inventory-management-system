@@ -137,6 +137,10 @@ form label{
     font-weight: bold;
     text-transform: uppercase;
 }
+.wrapper .section .container .dashboard_content_main {
+    background: #5b54502b;
+}
+
 .wrapper .section .container .dashboard_content_main .appForm{
     width: 50%;
     margin: 0 auto;
@@ -175,9 +179,25 @@ form label{
 p.responseMessage_error{
     background-color: rgb(42, 182, 238);
     color:white;
+    margin-top: 60px;
+    text-align: center;
 }
 
 p.responseMessage_success{
     background: #656272;
     color: white;
+    margin-top: 60px;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+.wrapper .section .container .userAddFormContainer{
+    border: solid green 2px;
 }
