@@ -12,11 +12,11 @@ div.column {
 }
 
 div.column-5 {
-    width: 30%;
+    width: 41.67%;
 }
 
 div.column-7 {
-    width: 70%;
+    width: 58.33%;
 }
 
 h1.section_header {
@@ -32,10 +32,6 @@ h1.section_header {
 /* styling the add users table */
 
 /* styling the add users table */
-
-.users table{
-    margin-right: 2px;
-}
 .users table,
 th,
 td {

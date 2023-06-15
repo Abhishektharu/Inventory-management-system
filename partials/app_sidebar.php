@@ -1,4 +1,4 @@
-<div class="sidebar">
+<div class="sidebar" id="navbar">
 
     <!--profile image & text-->
     <div class="profile">
@@ -10,19 +10,19 @@
     <!--menu item-->
     <ul>
         <li>
-            <a href="#" class="active" >
+            <a href="#" class="btn active" >
                 <span class="icon"><i class="fas fa-home"></i></span>
                 <span class="item">Home</span>
             </a>
         </li>
         <li>
-            <a href="dashboard.php">
+            <a href="dashboard.php" class="btn">
                 <span class="icon"><i class="fas fa-desktop"></i></span>
                 <span class="item">My Dashboard</span>
             </a>
         </li>
         <li>
-            <a href="user_add.php">
+            <a href="user_add.php" class="btn">
                 <span class="icon"><i class="fas fa-user-friends"></i></span>
                 <span class="item">Add People</span>
             </a>
@@ -59,3 +59,16 @@
                 </li> -->
     </ul>
 </div>
+
+<script>
+    var btnContainer = document.getElementById("navbar");
+    var btns = btnContainer.getElementByClassName("btn");
+
+    for(var i = 0; i < btns.length; i++){
+        btns[i].addEventlistener('click', function(){
+            var current = document.getElementByClassName("active");
+            current[0].className = current[0].className.replace("active");
+            this.className += "active";
+        });
+    }
+</script>

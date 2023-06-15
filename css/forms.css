@@ -1,0 +1,256 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
+
+
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing: border-box;
+    font-family: 'poppins', 'sans-serif';
+}
+
+body{
+    height: 100vh;
+    width: 100%;
+    background-color: #ebe4e4;
+    background-color: #fff;
+}
+
+
+/* ========== Homepage-css ==========*/
+/* homepage btn */
+.btn-main{
+    background-color: #4e50fd;
+    height: 50px;
+    width: 100px;
+    padding: 10px;
+}
+/* homepage btn a tag */
+.btn-main a{
+    text-decoration: none;
+    color: white;
+    font-size: 17px;
+}
+
+/* inserting image in homepage */
+.home-container {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* home-page image container */
+.image-container {
+	flex: 1;
+	padding: 20px;
+}
+
+/* home page image image */
+.image-container img {
+	max-width: 100%;
+	height: auto;
+}
+
+/* description */
+.description-container {
+	flex: 1;
+	padding: 20px;
+}
+
+/* description h1 */
+.description-container h1{
+	font-size: 50px;
+	margin-top: 0;
+	color: #1877f2;
+}
+
+/* home btn */
+.home-btn{
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+}
+
+/* home-btn-main */
+.btn-main{
+    margin: 10px 10px 0 0;
+    text-align: center;
+    /* padding: 10px; */
+    border-radius: 10px;
+    border: none;
+}
+
+.info-button{
+    margin: 10px 10px 0 0;
+    text-align: center;
+    position: relative;
+    left: 100px;
+    /* top: 80px;
+    left: -50%; */
+    border-radius: 10px;
+    border: none;
+}
+
+.info-button button{
+    font-size: 17px;
+}
+
+.info-button .btn-info{
+    background-color: #4e50fd;
+    font-size: 17px;
+    text-decoration: none;
+    padding: 10px;
+    border: none;
+    height: 50px;
+    width: 100px;
+    border-radius: 10px;
+    color: white;
+    font-size: 15px;
+}
+
+/* home-btn-a */
+.btn-main .btn{
+    background-color: #1877f2;
+    text-decoration: none;
+    padding: 10px;
+    border: none;
+    height: 60px;
+    width: 100px;
+    border-radius: 10px;
+    color: white;
+    font-size: 15px;
+}
+/* home page img */
+.home-img img{
+	height: 100vh;
+	width: fit-content;
+}
+/* ========== Homepage-css Ends ==========*/
+
+
+
+/* ========== Login-and-signup-css ==========*/
+/* login form */
+.content {
+	/* flex: 1; */
+	display: flex;
+	/* align-items: center;
+	justify-content: center; */
+    /* border: 1px solid green; ---------border--------- */
+    height: 599px;
+    width: 900px;
+    overflow: hidden;
+    /* margin: 10px 10px 10px 10px; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* image-box class to put image */
+.image-box {
+	/* flex: 1; */
+	padding: 20px;
+    width: auto;
+    height: 80vh;
+    /* border: 1px solid red; ---------border--------- */
+    overflow: hidden;
+    
+}
+
+.image-box img {
+	/* max-width: 100%;
+	height: auto; */
+    width: 100%;
+    height:100%;
+}  
+
+/* form */
+.form-field{
+    /* flex: 1; */
+    /* border: 1px solid hsl(213, 94%, 6%);  ---------border--------- */
+    height: 50%;
+    width: 400px;
+    margin-top: 100px;
+}
+
+.form-field .text{
+    font-size: 35px;
+    font-weight: 100;
+    text-align: center;
+}
+
+.form-field form{
+    margin-top: -20px;
+}
+
+.form-field form .input{
+    height: 45px;
+    width: 100%;
+    margin: 40px 0;
+}
+
+form .input input{
+    height: 100%;
+    width: 100%;
+    padding-left: 10px;
+    border: 1px solid #000000;
+    border-radius: 10px;
+}
+
+.btn{
+    border: none;
+    background-color: #4e50fd;
+    color: white;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.login .btn{
+    height: 30px;
+    width: 40%;
+    margin-left: 50%;
+    transform: translate(-50%);
+    text-align: center;
+    padding-left: 10px;
+    font-size: 17px;
+}
+
+.button .btn{
+    height: 30px;
+    width: 40%;
+    margin-left: 50%;
+    transform: translate(-50%);
+    text-align: center;
+    padding-left: 10px;
+    font-size: 17px;
+    background-color: #4e50fd;
+}
+
+.signup, .logging{
+    margin-top: 15px;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.signup a, .logging a{
+    font-weight: 600;
+    text-decoration: none;
+    color: #000000;
+}
+
+
+/* hover effect to roll back to home page  from login and signup */
+.back-login, .back-signup{
+    margin-top: 30px;
+    align-items: center;
+    text-align: center;
+}
+
+.back-login a, .back-signup a{
+    text-decoration: none;
+    color: #000000;
+}
+/* ========== Login-and-signup-css Ends ==========*/
+
