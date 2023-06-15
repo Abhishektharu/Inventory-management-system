@@ -24,7 +24,7 @@ $users = include('show_users.php');
     <link rel="stylesheet" href="css/user_add.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <link rel="stylesheet" href="css/user_add2.css">
-    
+
 </head>
 
 <body>
@@ -47,14 +47,37 @@ $users = include('show_users.php');
                 <div class="dashboard_content_main">
                     <div class="userAddFormContainer">
 
-                        here willfasdf
+
                         <div class="dashboard_content">
                             <div class="dashboard_content_main">
                                 <div class="row">
                                     <div class="column-5">
                                         <h1 class="section_header"><i class="fa fa-plus"></i> Create User</h1>
                                         <div id="userAddFormContainer">
+                                            <form action="database/add.php" method="POST" class="appForm">
+                                                <div class="appFormInputContainer">
+                                                    <label for="first_name">First Name</label>
+                                                    <input type="text" id="first_name" name="first_name" class="appFormInput" />
+                                                </div>
 
+                                                <div class="appFormInputContainer">
+                                                    <label for="last_name">Last Name</label>
+                                                    <input type="text" id="last_name" name="last_name" class="appFormInput" />
+                                                </div>
+
+                                                <div class="appFormInputContainer">
+                                                    <label for="email">email</label>
+                                                    <input type="text" id="email" name="email" class="appFormInput" />
+                                                </div>
+
+                                                <div class="appFormInputContainer">
+                                                    <label for="password">password</label>
+                                                    <input type="password" id="password" name="password" class="appFormInput" />
+                                                </div>
+
+                                                <input type="hidden" name="table" value="users" />
+                                                <button type="submit" class="appBtn"><i class="fa fa-plus"></i> Add User</button>
+                                            </form>
                                         </div>
                                     </div>
                                     <div class="column-7">
@@ -71,23 +94,31 @@ $users = include('show_users.php');
                                                             <th>Email</th>
                                                             <th>Created At</th>
                                                             <th>Upadated At</th>
+                                                            <th>Option</th>
                                                         </tr>
                                                     </thead>
 
                                                     <!-- table body of add users  -->
                                                     <tbody>
-                                                        <?php foreach($users as $index=> $user){
-                                                            ?>
+                                                        <?php foreach ($users as $index => $user) {
+                                                        ?>
                                                             <tr>
-                                                            <td><?= $index + 1 ?></td>
-                                                            <td><?= $user['first_name'] ?></td>
-                                                            <td><?= $user['last_name'] ?></td>
-                                                            <td><?= $user['email'] ?></td>
-                                                            <!-- set month day year using php  -->
-                                                            <td><?= date('M d, Y @ h:i:s A', strtotime($user['created_at'])) ?></td>
-                                                            <td><?= date('M d, Y @ h:i:s A', strtotime($user['updated_at'])) ?></td>
-                                                            
-                                                        </tr>
+                                                                <td><?= $index + 1 ?></td>
+                                                                <td><?= $user['first_name'] ?></td>
+                                                                <td><?= $user['last_name'] ?></td>
+                                                                <td><?= $user['email'] ?></td>
+                                                                <!-- set month day year using php  -->
+                                                                <td><?= date('M d, Y @ h:i:s A', strtotime($user['created_at'])) ?></td>
+                                                                <td><?= date('M d, Y @ h:i:s A', strtotime($user['updated_at'])) ?></td>
+
+
+                                                                <!-- adding edit and delete option` -->
+                                                                <td>
+                                                                    <a href=""><i class="fa fa-pencil"></i>Edit</a>
+
+                                                                    <a href="" class="deleteUser" data-userid="<?= $user['id'] ?>" data-fname="<?= $user['first_name'] ?>" data-lname="<?= $user['last_name'] ?>"> <i class="fa fa-trash"></i>Delete</a>
+                                                                </td>
+                                                            </tr>
                                                         <?php } ?>
                                                     </tbody>
                                                 </table>
@@ -99,30 +130,7 @@ $users = include('show_users.php');
                             </div>
                         </div>
 
-                        <form action="add.php" method="POST" class="appForm">
-                            <div class="appFormInputContainer">
-                                <label for="first_name">First Name</label>
-                                <input type="text" id="first_name" name="first_name" class="appFormInput" />
-                            </div>
 
-                            <div class="appFormInputContainer">
-                                <label for="last_name">Last Name</label>
-                                <input type="text" id="last_name" name="last_name" class="appFormInput" />
-                            </div>
-
-                            <div class="appFormInputContainer">
-                                <label for="email">email</label>
-                                <input type="text" id="email" name="email" class="appFormInput" />
-                            </div>
-
-                            <div class="appFormInputContainer">
-                                <label for="password">password</label>
-                                <input type="password" id="password" name="password" class="appFormInput" />
-                            </div>
-
-                            <input type="hidden" name="table" value="users" />
-                            <button type="submit" class="appBtn"><i class="fa fa-plus"></i> Add User</button>
-                        </form>
                     </div>
                 </div>
                 <?php
@@ -150,6 +158,45 @@ $users = include('show_users.php');
     </div>
 </body>
 <script src="js/script.js"></script>
+<script src="js/jquery/jquery-3.7.0.min.js"></script>
+<script>
+    function script() {
+        this.initilize = function() {
+                this.registerEvents();
+            },
+
+            this.registerEvents = function() {
+                document.addEventListener('click', function(e) {
+                    targetElement = e.target;
+                    classList = e.target.classList;
+
+                    if (classList.contains('deleteUser')) {
+                        e.preventDefault();
+                        userId = targetElement.dataset.userid;
+                        fname = targetElement.dataset.fname;
+                        lname = targetElement.dataset.lname;
+                        fullName = fname + " " + lname;
+
+                        if (window.confirm('Are you sure to delete? ' + fullName)) {
+                            $.ajax({
+                                method: 'POST',
+                                data: {
+                                    user_id: userId
+                                },
+                                url: 'database/delete_user.php'
+                            })
+                        } else {
+                            console.log("not delete");
+                        }
+                    }
+                });
+            }
+
+    }
+
+    var script = new script;
+    script.initilize();
+</script>
 
 </html>
 
