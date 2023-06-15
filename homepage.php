@@ -11,9 +11,12 @@
     <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
-    <div class="header">
+    <div class="header" style="display: flex; float: left">
         <div class="homepageContainer">
             <a href="login.php">Login</a>
+        </div>
+        <div class="homepageContainer">
+            <a href="signup.php">Sign up</a>
         </div>
     </div>
     <div class="banner">

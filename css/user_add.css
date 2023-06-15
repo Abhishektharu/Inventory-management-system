@@ -138,7 +138,7 @@ form label{
     text-transform: uppercase;
 }
 .wrapper .section .container .dashboard_content_main {
-    background: #e1dada3d;
+    background: #5b54502b;
 }
 
 .wrapper .section .container .dashboard_content_main .appForm{
@@ -197,3 +197,7 @@ p.responseMessage_success{
 }
 
 
+
+.wrapper .section .container .userAddFormContainer{
+    border: solid green 2px;
+}
