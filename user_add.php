@@ -54,7 +54,7 @@ $users = include('show_users.php');
                                     <div class="column-5">
                                         <h1 class="section_header"><i class="fa fa-plus"></i> Create User</h1>
                                         <div id="userAddFormContainer">
-                                            <form action="database/add.php" method="POST" class="appForm">
+                                            <form action="add.php" method="POST" class="appForm">
                                                 <div class="appFormInputContainer">
                                                     <label for="first_name">First Name</label>
                                                     <input type="text" id="first_name" name="first_name" class="appFormInput" />
@@ -114,7 +114,7 @@ $users = include('show_users.php');
 
                                                                 <!-- adding edit and delete option` -->
                                                                 <td>
-                                                                    <a href=""><i class="fa fa-pencil"></i>Edit</a>
+                                                                    <!-- <a href=""><i class="fa fa-pencil"></i>Edit</a> -->
 
                                                                     <a href="" class="deleteUser" data-userid="<?= $user['id'] ?>" data-fname="<?= $user['first_name'] ?>" data-lname="<?= $user['last_name'] ?>"> <i class="fa fa-trash"></i>Delete</a>
                                                                 </td>
@@ -181,9 +181,21 @@ $users = include('show_users.php');
                             $.ajax({
                                 method: 'POST',
                                 data: {
-                                    user_id: userId
+                                    user_id: userId,
+                                    f_name: fname,
+                                    l_name: lname
                                 },
-                                url: 'database/delete_user.php'
+                                url: 'database/delete_user.php',
+                                dataType: 'json',
+                                success: function(data){
+                                    //from delete_user success = true;
+                                    if(data.success){
+                                        if(window.alert(data.message)){
+                                            location.reload();
+                                        }
+                                    }
+                                    else window.alert(data.message);
+                                }
                             })
                         } else {
                             console.log("not delete");
