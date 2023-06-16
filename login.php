@@ -59,7 +59,7 @@ if ($_POST) {
 
 <head>
     <title>IMS Login - Inventory Management System</title>
-    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <link rel="stylesheet" type="text/css" href="css/forms.css">
     <style>
         div#errorMessage {
             background-color: #fff;
@@ -81,7 +81,7 @@ if ($_POST) {
     <?php }
 
     ?>
-    <div class="container">
+    <!-- <div class="container">
         <div class="loginHeader">
             <h1>XYZ COMPANY</h1>
             <p>Inventory Management System</p>
@@ -102,7 +102,41 @@ if ($_POST) {
 
             </form>
         </div>
+    </div> -->
+    <div class="content">
+        <div class="image-box">
+            <img src="ims.png" alt="Image">
+        </div>
+
+        <div class="form-field">
+            <div class="text">Login</div>
+            <form action="login.php" method="post">
+                <div class="input">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" placeholder="username" required >
+                </div>
+
+                <div class="input">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" placeholder="password">
+                </div>
+
+                <div class="login">
+                    <button type="submit" class="btn" name="login">Login</button>
+                </div>
+
+               <div class="signup">
+                    <p>Don't have an account?</p><a href="signup.php">Sign Up</a>     
+               </div>  
+
+               <div class="back-login">
+                    <a href="homepage.php" class="hover-back-login"> BACK</a>
+               </div>
+
+            </form>
+
+        </div>
+
     </div>
 </body>
-
 </html>
