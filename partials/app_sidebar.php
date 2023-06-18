@@ -9,12 +9,12 @@
 
     <!--menu item-->
     <ul>
-        <li>
+        <!-- <li>
             <a href="#" class="btn active" >
                 <span class="icon"><i class="fas fa-home"></i></span>
                 <span class="item">Home</span>
             </a>
-        </li>
+        </li> -->
         <li>
             <a href="dashboard.php" class="btn">
                 <span class="icon"><i class="fas fa-desktop"></i></span>
@@ -24,8 +24,27 @@
         <li>
             <a href="user_add.php" class="btn">
                 <span class="icon"><i class="fas fa-user-friends"></i></span>
-                <span class="item">Add People</span>
+                <span class="item">Product Management</span>
             </a>
+        </li>
+        <li>
+            <a href="user_add.php" class="btn">
+                <span class="icon"><i class="fas fa-user-friends"></i></span>
+                <span class="item">Supplier Management</span>
+            </a>
+        </li>
+        <li>
+            <a href="user_add.php" class="btn">
+                <span class="icon"><i class="fas fa-user-friends"></i></span>
+                <span class="item">User Management</span>
+                <i class="fa fa-angle-down mainMenuIconArrow"></i>
+            </a>
+
+            <!-- subMenus css is written in user_add2.css -->
+            <ul class="subMenus">
+                <li><a href="#"><i class="fa fa-circle"></i> View Users</a></li>
+                <li><a href="#"><i class="fa fa-circle"></i> View Users</a></li>
+            </ul>
         </li>
         <!-- <li>
                     <a href="#">
