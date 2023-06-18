@@ -151,10 +151,6 @@ if ($_POST) {
                     <button type="submit" class="btn" name="login">Login</button>
                 </div>
 
-               <div class="signup">
-                    <p>Don't have an account?</p><a href="signup.php">Sign Up</a>     
-               </div>  
-
                <div class="back-login">
                     <a href="homepage.php" class="hover-back-login"> BACK</a>
                </div>
