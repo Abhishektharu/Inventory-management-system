@@ -11,12 +11,9 @@
     <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
-    <div class="header" style="display: flex; float: left">
+    <div class="header" style="float: left">
         <div class="homepageContainer">
             <a href="login.php">Login</a>
-        </div>
-        <div class="homepageContainer">
-            <a href="signup.php">Sign up</a>
         </div>
     </div>
     <div class="banner">
@@ -63,9 +60,9 @@
                     <!-- socialmediaicons -->
                     <div class="socialIconsContainer">
                         <a href=""><i class="fa fa-twitter"></i></a>
-                        <a href=""><i class="fa fa-twitter"></i></a>
-                        <a href=""><i class="fa fa-twitter"></i></a>
-                        <a href=""><i class="fa fa-twitter"></i></a>
+                        <a href=""><i class="fa fa-facebook"></i></a>
+                        <a href=""><i class="fa fa-instagram"></i></a>
+                        <a href=""><i class="fa fa-whatsapp"></i></a>
                     </div>
 
                     

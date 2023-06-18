@@ -2,8 +2,10 @@
 	background: url('../images/login-background.jpg') no-repeat center center fixed;
 	background-size: cover;
 } */
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
+
 body{	
-	font-family: arial;
+	font-family: 'Poppins', sans-serif;
 }
 
 div.dashboard_sidebar{
@@ -202,7 +204,8 @@ div.socialIconsContainer a{
 	padding-top: 7px;
 	background: #d4d4d4;
 	border-radius: 50%;
-	color:#fff;
+	/* color:#fff; */
+	color: #4e50fb;
 	margin-left: 20px;
 	margin-left: 20px;
 }

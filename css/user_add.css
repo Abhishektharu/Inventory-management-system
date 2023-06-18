@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap'); */
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
 
 * {
     list-style: none;
@@ -6,7 +7,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
@@ -89,9 +90,11 @@ body {
 }
 
 .wrapper .section .top_navbar {
-    background: rgb(7, 105, 185);
+    /* background: rgb(7, 105, 185); */
+    background: #6979fc;
     height: 50px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     padding: 0 30px;
 
@@ -155,6 +158,7 @@ form label{
 .wrapper .section .container .dashboard_content_main .appForm .appFormInputContainer .appFormInput{
     width: 100%;
     height: 33px;
+    padding-left: 10px;
     border: 2px solid rgb(44, 42, 42);
     border-radius: 5px;
 }
@@ -198,6 +202,6 @@ p.responseMessage_success{
 
 
 
-.wrapper .section .container .userAddFormContainer{
+/* .wrapper .section .container .userAddFormContainer{
     border: solid green 2px;
-}
+} */

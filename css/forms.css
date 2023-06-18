@@ -228,19 +228,6 @@ form .input input{
     background-color: #4e50fd;
 }
 
-.signup, .logging{
-    margin-top: 15px;
-    font-size: 1rem;
-    text-align: center;
-}
-
-.signup a, .logging a{
-    font-weight: 600;
-    text-decoration: none;
-    color: #000000;
-}
-
-
 /* hover effect to roll back to home page  from login and signup */
 .back-login, .back-signup{
     margin-top: 30px;
