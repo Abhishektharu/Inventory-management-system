@@ -18,7 +18,7 @@ body {
 /* .sidebar */
 .wrapper .sidebar {
     /* background: rgb(5, 68, 104); */
-    background: #4e50fb;
+    background: rgb(5, 68, 104);
     position: fixed;
     top: 0;
     left: 0;

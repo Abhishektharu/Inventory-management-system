@@ -57,22 +57,22 @@ $users = include('show_users.php');
                                             <form action="add.php" method="POST" class="appForm">
                                                 <div class="appFormInputContainer">
                                                     <label for="first_name">First Name</label>
-                                                    <input type="text" id="first_name" name="first_name" class="appFormInput" />
+                                                    <input type="text" id="first_name" name="first_name" class="appFormInput" required/>
                                                 </div>
 
                                                 <div class="appFormInputContainer">
                                                     <label for="last_name">Last Name</label>
-                                                    <input type="text" id="last_name" name="last_name" class="appFormInput" />
+                                                    <input type="text" id="last_name" name="last_name" class="appFormInput" required/>
                                                 </div>
 
                                                 <div class="appFormInputContainer">
                                                     <label for="email">email</label>
-                                                    <input type="text" id="email" name="email" class="appFormInput" />
+                                                    <input type="text" id="email" name="email" class="appFormInput" required/>
                                                 </div>
 
                                                 <div class="appFormInputContainer">
                                                     <label for="password">password</label>
-                                                    <input type="password" id="password" name="password" class="appFormInput" />
+                                                    <input type="password" id="password" name="password" class="appFormInput" required/>
                                                 </div>
 
                                                 <input type="hidden" name="table" value="users" />

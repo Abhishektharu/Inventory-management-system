@@ -21,7 +21,7 @@ div.column-7 {
 
 h1.section_header {
     font-size: 21px;
-    color: green;
+    color: rgb(5, 80, 5);
     border-bottom: 1px solid #ffd7e1;
     padding-bottom: 11px;
     padding: 10px;
@@ -65,6 +65,7 @@ p.userCount {
 }
 
 .subMenus{
-    background: green;
+    /* background: green; */
     color: #f690bf;
+    font-size: 10px;
 }
