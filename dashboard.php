@@ -16,6 +16,7 @@ $user = $_SESSION['user'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/user_add2.css">
     <style>
         .wrapper .section .container {
             margin: 30px;

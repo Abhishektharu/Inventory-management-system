@@ -65,7 +65,14 @@ p.userCount {
 }
 
 .subMenus{
-    /* background: green; */
+    background: rgb(10, 2, 154);
     color: #f690bf;
     font-size: 10px;
+    padding-left: 20px !important;
+    display: none;
+}
+
+
+i.mainMenuIconArrow{
+    float: right;
 }
