@@ -22,34 +22,49 @@
                 <span class="item">My Dashboard</span>
             </a>
         </li>
-        <li>
-            <a href="#" class="btn">
-                <span class="icon"><i class="fas fa-desktop"></i></span>
-                <span class="item">Product Management</span>
-            </a>
-        </li>
-        <li>
-            <a href="#" class="btn">
-                <span class="icon"><i class="fas fa-truck"></i></span>
-                <span class="item">Supplier Management</span>
-            </a>
-        </li>
 
 
-
-
-
-
-
-        <li class="liMainMenu showHideSubMenu" data-submenu="user">
-            <a href="javascript:void(0);" class="showHideSubMenu" data-submenu="user">
-                <span class="icon"><i class="fas fa-user-friends showHideSubMenu" data-submenu="user"></i></span>
-                <span class="showHideSubMenu"  data-submenu="user">User Management</span>
-                <i class="fa fa-angle-down mainMenuIconArrow showHideSubMenu" data-submenu="user"></i>
+        <li class="liMainMenu showHideSubMenu" >
+            <a href="javascript:void(0);" class="showHideSubMenu" >
+                <span class="icon"><i class="fas fa-user-friends showHideSubMenu" ></i></span>
+                <span class="showHideSubMenu"  >Product Management</span>
+                <i class="fa fa-angle-down mainMenuIconArrow showHideSubMenu" ></i>
             </a>
 
             <!-- subMenus css is written in user_add2.css -->
-            <ul class="subMenus" id="user">
+            <ul class="subMenus" >
+                <li><a class="subMenuLink" href="#"><i class="fa fa-circle"></i> View Product</a></li>
+                <li><a class="subMenuLink" href="#"><i class="fa fa-circle"></i> Add Product</a></li>
+            </ul>
+        </li>
+
+        <li class="liMainMenu showHideSubMenu" >
+            <a href="javascript:void(0);" class="showHideSubMenu" >
+                <span class="icon"><i class="fas fa-truck showHideSubMenu" ></i></span>
+                <span class="showHideSubMenu"  >Supplier Management</span>
+                <i class="fa fa-angle-down mainMenuIconArrow showHideSubMenu" ></i>
+            </a>
+
+            <!-- subMenus css is written in user_add2.css -->
+            <ul class="subMenus" >
+                <li><a class="subMenuLink" href="#"><i class="fa fa-circle"></i> View Supplier</a></li>
+                <li><a class="subMenuLink" href="#"><i class="fa fa-circle"></i> Add Supplier</a></li>
+            </ul>
+        </li>
+
+
+
+
+
+        <li class="liMainMenu showHideSubMenu" >
+            <a href="javascript:void(0);" class="showHideSubMenu" >
+                <span class="icon"><i class="fas fa-user-friends showHideSubMenu" ></i></span>
+                <span class="showHideSubMenu"  >User Management</span>
+                <i class="fa fa-angle-down mainMenuIconArrow showHideSubMenu" ></i>
+            </a>
+
+            <!-- subMenus css is written in user_add2.css -->
+            <ul class="subMenus" >
                 <li><a class="subMenuLink" href="#"><i class="fa fa-circle"></i> View Users</a></li>
                 <li><a class="subMenuLink" href="#"><i class="fa fa-circle"></i> Add Users</a></li>
             </ul>

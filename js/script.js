@@ -7,18 +7,27 @@ hamburger.addEventListener("click", function() {
 // submenu show /hide function
 document.addEventListener('click', function(e){
     let clickedEL = e.target;
+
     if(clickedEL.classList.contains('showHideSubMenu')){
         // alert('main menu');
-        let targetMenu = clickedEL.dataset.submenu;
+        // console.log();
 
+        let subMenu = clickedEL.closest('li').querySelector('.subMenus')
+        let mainMenuIcon = clickedEL.closest('li').querySelector('.mainMenuIconArrow')
+
+        console.log(mainMenuIcon);
         //logic to list view users and add users style.display = 'block';
-        if(targetMenu != undefined){
-            let subMenu = document.getElementById(targetMenu);
+        if(subMenu != null){
             if(subMenu.style.display === 'block'){
                 subMenu.style.display = 'none';
+                mainMenuIcon.classList.remove('fa-angle-down');
+                mainMenuIcon.classList.add('fa-angle-left');
+
             }
             else{
                 subMenu.style.display = 'block';
+                mainMenuIcon.classList.remove('fa-angle-left');
+                mainMenuIcon.classList.add('fa-angle-down');
             }
         }
         // console.log(targetMenu);
