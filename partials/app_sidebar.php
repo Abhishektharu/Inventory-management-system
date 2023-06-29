@@ -1,4 +1,3 @@
-
 <div class="sidebar" id="navbar">
 
     <!--profile image & text-->
@@ -10,12 +9,12 @@
 
     <!--menu item-->
     <ul>
-        <li>
+        <!-- <li>
             <a href="#" class="btn active" >
                 <span class="icon"><i class="fas fa-home"></i></span>
                 <span class="item">Home</span>
             </a>
-        </li>
+        </li> -->
         
         <li>
             <a href="dashboard.php" class="btn">
@@ -35,19 +34,30 @@
                 <span class="item">Supplier Management</span>
             </a>
         </li>
-        <li class="liMainMenu">
-            <a href="user_add.php" class="btn">
-                <span class="icon"><i class="fas fa-user-friends"></i></span>
-                <span class="item">User Management</span>
-                <i class="fa fa-angle-down mainMenuIconArrow"></i>
+
+
+
+
+
+
+
+        <li class="liMainMenu showHideSubMenu" data-submenu="user">
+            <a href="javascript:void(0);" class="showHideSubMenu" data-submenu="user">
+                <span class="icon"><i class="fas fa-user-friends showHideSubMenu" data-submenu="user"></i></span>
+                <span class="showHideSubMenu"  data-submenu="user">User Management</span>
+                <i class="fa fa-angle-down mainMenuIconArrow showHideSubMenu" data-submenu="user"></i>
             </a>
 
             <!-- subMenus css is written in user_add2.css -->
-            <ul class="subMenus">
+            <ul class="subMenus" id="user">
                 <li><a class="subMenuLink" href="#"><i class="fa fa-circle"></i> View Users</a></li>
                 <li><a class="subMenuLink" href="#"><i class="fa fa-circle"></i> Add Users</a></li>
             </ul>
         </li>
+
+
+
+
         
     </ul>
 </div>
