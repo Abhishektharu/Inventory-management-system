@@ -76,3 +76,9 @@ p.userCount {
 i.mainMenuIconArrow{
     float: right;
 }
+
+.subMenuActive{
+    font-weight: bold;
+    color: #f690bf;
+    background: #f690bf;
+}

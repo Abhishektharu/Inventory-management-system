@@ -26,8 +26,8 @@
 
         <li class="liMainMenu showHideSubMenu" >
             <a href="javascript:void(0);" class="showHideSubMenu" >
-                <span class="icon"><i class="fas fa-user-friends showHideSubMenu" ></i></span>
-                <span class="showHideSubMenu"  >Product Management</span>
+                <span class="icon"><i class="fas fa-tag showHideSubMenu" ></i></span>
+                <span class="showHideSubMenu"  >Product</span>
                 <i class="fa fa-angle-down mainMenuIconArrow showHideSubMenu" ></i>
             </a>
 
@@ -41,7 +41,7 @@
         <li class="liMainMenu showHideSubMenu" >
             <a href="javascript:void(0);" class="showHideSubMenu" >
                 <span class="icon"><i class="fas fa-truck showHideSubMenu" ></i></span>
-                <span class="showHideSubMenu"  >Supplier Management</span>
+                <span class="showHideSubMenu"  >Supplier</span>
                 <i class="fa fa-angle-down mainMenuIconArrow showHideSubMenu" ></i>
             </a>
 
@@ -59,14 +59,14 @@
         <li class="liMainMenu showHideSubMenu" >
             <a href="javascript:void(0);" class="showHideSubMenu" >
                 <span class="icon"><i class="fas fa-user-friends showHideSubMenu" ></i></span>
-                <span class="showHideSubMenu"  >User Management</span>
+                <span class="showHideSubMenu"  >User</span>
                 <i class="fa fa-angle-down mainMenuIconArrow showHideSubMenu" ></i>
             </a>
 
             <!-- subMenus css is written in user_add2.css -->
             <ul class="subMenus" >
                 <li><a class="subMenuLink" href="#"><i class="fa fa-circle"></i> View Users</a></li>
-                <li><a class="subMenuLink" href="#"><i class="fa fa-circle"></i> Add Users</a></li>
+                <li><a class="subMenuLink" href="./user_add.php"><i class="fa fa-circle"></i> Add Users</a></li>
             </ul>
         </li>
 
