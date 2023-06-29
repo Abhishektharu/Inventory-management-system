@@ -65,8 +65,8 @@
 
             <!-- subMenus css is written in user_add2.css -->
             <ul class="subMenus" >
-                <li><a class="subMenuLink" href="#"><i class="fa fa-circle"></i> View Users</a></li>
-                <li><a class="subMenuLink" href="./user_add.php"><i class="fa fa-circle"></i> Add Users</a></li>
+                <li><a class="subMenuLink" href="./user_add.php"><i class="fa fa-circle"></i> View Users</a></li>
+                <li><a class="subMenuLink" href=""><i class="fa fa-circle"></i> Add Users</a></li>
             </ul>
         </li>
 

@@ -25,14 +25,21 @@ document.addEventListener('click', function(e){
         });
 
 
-        
-        //check if there is submenu
+    }
+    // console.log(clickedEL);
+    // console.log(e);
+})
+
+//function - to show/hide submenu
+function showHideSubMenu(subMenu,mainMenuIcon){
+            // console.log(mainMenuIcon);
+        //logic to list view users and add users style.display = 'block';
         if(subMenu != null){
             if(subMenu.style.display === 'block'){
                 subMenu.style.display = 'none';
                 mainMenuIcon.classList.remove('fa-angle-down');
                 mainMenuIcon.classList.add('fa-angle-left');
-                
+
             }
             else{
                 subMenu.style.display = 'block';
@@ -40,7 +47,32 @@ document.addEventListener('click', function(e){
                 mainMenuIcon.classList.add('fa-angle-down');
             }
         }
-    }
+        // console.log(targetMenu);
+}
+// console.log(document.querySelectorAll('.btn'));
 
-})
 
+//add / hide active class to menu
+//get the current page
+// use selector to get the current menu or submenu
+// add the active class
+
+let pathArray = window.location.pathname.split('/');
+let curFile = pathArray[pathArray.length - 1];
+
+let curNav = document.querySelector('a[href="./' + curFile + '"]');
+curNav.classList.add('subMenuActive');
+
+let mainNav = curNav.closest('li.liMainMenu');
+//active menu color;
+mainNav.style.background = 'red';
+
+let subMenu = curNav.closest('.subMenus');
+let mainMenuIcon = mainNav.querySelector('i.mainMenuIconArrow');
+
+console.log(mainMenuIcon);
+
+// call the function show / hide
+showHideSubMenu(subMenu, mainMenuIcon);
+// console.log(mainNav);
+// console.log(curNav);
