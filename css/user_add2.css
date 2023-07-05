@@ -12,11 +12,11 @@ div.column {
 }
 
 div.column-5 {
-    width: 41.67%;
+    width: 70%;
 }
 
 div.column-7 {
-    width: 58.33%;
+    width: 100%;
 }
 
 h1.section_header {
@@ -65,7 +65,7 @@ p.userCount {
 }
 
 .subMenus{
-    background: rgb(10, 2, 154);
+    background: rgb(7, 3, 78);
     color: #f690bf;
     font-size: 10px;
     padding-left: 20px !important;
@@ -76,3 +76,10 @@ p.userCount {
 i.mainMenuIconArrow{
     float: right;
 }
+
+.subMenuActive{
+    font-weight: bold;
+    color: #f690bf;
+    background: #f690bf;
+}
+

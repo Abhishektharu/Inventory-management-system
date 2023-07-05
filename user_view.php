@@ -50,33 +50,50 @@ $users = include('show_users.php');
                         <div class="dashboard_content">
                             <div class="dashboard_content_main">
                                 <div class="row">
-                                    <div class="column-5">
-                                        <h1 class="section_header"><i class="fa fa-plus"></i> Create User</h1>
-                                        <div id="userAddFormContainer">
-                                            <form action="add.php" method="POST" class="appForm">
-                                                <div class="appFormInputContainer">
-                                                    <label for="first_name">First Name</label>
-                                                    <input type="text" id="first_name" name="first_name" class="appFormInput" required/>
-                                                </div>
+                                    <div class="column-7">
+                                        <h1 class="section_header"><i class="fa fa-list"></i> List of Users</h1>
+                                        <div class="section_content">
+                                            <div class="users">
+                                                <table>
+                                                    <thead>
 
-                                                <div class="appFormInputContainer">
-                                                    <label for="last_name">Last Name</label>
-                                                    <input type="text" id="last_name" name="last_name" class="appFormInput" required/>
-                                                </div>
+                                                        <tr>
+                                                            <th>nu</th>
+                                                            <th>First Name</th>
+                                                            <th>Last Name</th>
+                                                            <th>Email</th>
+                                                            <th>Created At</th>
+                                                            <th>Upadated At</th>
+                                                            <th>Option</th>
+                                                        </tr>
+                                                    </thead>
 
-                                                <div class="appFormInputContainer">
-                                                    <label for="email">email</label>
-                                                    <input type="text" id="email" name="email" class="appFormInput" required/>
-                                                </div>
+                                                    <!-- table body of add users  -->
+                                                    <tbody>
+                                                        <?php foreach ($users as $index => $user) {
+                                                        ?>
+                                                            <tr>
+                                                                <td><?= $index + 1 ?></td>
+                                                                <td><?= $user['first_name'] ?></td>
+                                                                <td><?= $user['last_name'] ?></td>
+                                                                <td><?= $user['email'] ?></td>
+                                                                <!-- set month day year using php  -->
+                                                                <td><?= date('M d, Y @ h:i:s A', strtotime($user['created_at'])) ?></td>
+                                                                <td><?= date('M d, Y @ h:i:s A', strtotime($user['updated_at'])) ?></td>
 
-                                                <div class="appFormInputContainer">
-                                                    <label for="password">password</label>
-                                                    <input type="password" id="password" name="password" class="appFormInput" required/>
-                                                </div>
 
-                                                <input type="hidden" name="table" value="users" />
-                                                <button type="submit" class="appBtn"><i class="fa fa-plus"></i> Add User</button>
-                                            </form>
+                                                                <!-- adding edit and delete option` -->
+                                                                <td>
+                                                                    <!-- <a href=""><i class="fa fa-pencil"></i>Edit</a> -->
+
+                                                                    <a href="" class="deleteUser" data-userid="<?= $user['id'] ?>" data-fname="<?= $user['first_name'] ?>" data-lname="<?= $user['last_name'] ?>"> <i class="fa fa-trash"></i>Delete</a>
+                                                                </td>
+                                                            </tr>
+                                                        <?php } ?>
+                                                    </tbody>
+                                                </table>
+                                                <p class="userCount"><?= count($users) ?> Users </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -164,3 +181,9 @@ $users = include('show_users.php');
 </script>
 
 </html>
+
+<!-- table create
+insert data
+use joins
+
+update schemas -->

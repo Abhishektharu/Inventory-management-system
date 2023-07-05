@@ -1,7 +1,20 @@
 <?php
     session_start();
+
+    //capture the table mapping for all the columns
+    include('database/table_columns.php');
+    // var_dump($table_columns_mapping);
+    // die;
     
-    // $table_name = $_SESSION['table'];
+
+    //extract product columns from session
+    $table_name = $_SESSION['table'];
+    $columns = $table_columns_mapping[$table_name];
+
+    var_dump($columns);
+    die;
+
+    //for users data
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
     $email = $_POST['email'];

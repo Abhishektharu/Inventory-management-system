@@ -3,14 +3,11 @@
 session_start();
 
 if (!isset($_SESSION['user'])) header('Location: homepage.php');
-$_SESSION['table'] = 'users';
+$_SESSION['table'] = 'products';
 
 $user = $_SESSION['user'];
 $response_message = '';
-
-$users = include('show_users.php');
-// var_dump($users);
-// die;
+    
 ?>
 
 <!DOCTYPE html>
@@ -20,10 +17,12 @@ $users = include('show_users.php');
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventory Manangement System</title>
+    <title>Product Add - Inventory Manangement System</title>
     <link rel="stylesheet" href="css/user_add.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <link rel="stylesheet" href="css/user_add2.css">
+    <link rel="stylesheet" href="css/user_add3.css">
+
 
 </head>
 
@@ -51,31 +50,21 @@ $users = include('show_users.php');
                             <div class="dashboard_content_main">
                                 <div class="row">
                                     <div class="column-5">
-                                        <h1 class="section_header"><i class="fa fa-plus"></i> Create User</h1>
+                                        <h1 class="section_header"><i class="fa fa-plus"></i> Add Product</h1>
                                         <div id="userAddFormContainer">
                                             <form action="add.php" method="POST" class="appForm">
                                                 <div class="appFormInputContainer">
-                                                    <label for="first_name">First Name</label>
-                                                    <input type="text" id="first_name" name="first_name" class="appFormInput" required/>
+                                                    <label for="product_name">Product Name</label>
+                                                    <input type="text" id="product_name" name="product_name" class="appFormInput" placeholder="Enter product name" required/>
                                                 </div>
 
-                                                <div class="appFormInputContainer">
-                                                    <label for="last_name">Last Name</label>
-                                                    <input type="text" id="last_name" name="last_name" class="appFormInput" required/>
+                                                <!-- css written in user_add3.css -->
+                                                <div class="appFormInputContainerother">
+                                                    <label for="description">Product Description</label>
+                                                    <textarea id="description" name="description" class="appFormInput productTextAreaInput" placeholder="Enter product description">
+                                                    </textarea>
                                                 </div>
-
-                                                <div class="appFormInputContainer">
-                                                    <label for="email">email</label>
-                                                    <input type="text" id="email" name="email" class="appFormInput" required/>
-                                                </div>
-
-                                                <div class="appFormInputContainer">
-                                                    <label for="password">password</label>
-                                                    <input type="password" id="password" name="password" class="appFormInput" required/>
-                                                </div>
-
-                                                <input type="hidden" name="table" value="users" />
-                                                <button type="submit" class="appBtn"><i class="fa fa-plus"></i> Add User</button>
+                                                <button type="submit" class="appBtn"><i class="fa fa-plus"></i> Add Product</button>
                                             </form>
                                         </div>
                                     </div>

@@ -10,58 +10,20 @@ if ($_POST) {
     $password = $_POST['password'];
     // $password = $_POST['password'];
 
-    $query = 'SELECT * FROM users WHERE users.email="'. $username .'"';
-    $stmt = $conn->prepare($query);
+    $query = 'SELECT * FROM users WHERE users.email="'. $username .'" AND users.password="'. $password .'"';
+    // $stmt = $conn->prepare($query);
 
-    $stmt->execute();
-    $stmt->setFetchMode(PDO::FETCH_ASSOC);
-
-    $users = $stmt->fetchAll();
-
-
-
-    $user_exist = false;
-    foreach ($users as $user) {
-
-        $upass = $user['password'];
-        if (password_verify($password, $upass)) {
-            $user_exist = true;
-            $_SESSION['user'] = $user;
-            break;
-        }
-    }
-
-    if($user_exist) 
-    {
-        header('Location: dashboard.php');
-    }
-
-    else 
-    {
-        $error_message = 'Please enter correct username or password.';
-    }
-
-    // if($stmt -> rowCount() > 0){
-    //     $stmt->setFetchMode(PDO::FETCH_ASSOC);
-    //     $user = $stmt->fetchAll()[0];
-    //     $_SESSION['user'] = $user;
-
-    //     header('Location: dashboard.php');
-    // }
-    // else{
-    //     $error_message = 'please insert correct username and password';
-    // }
-
-    // $stmt = $conn->prepare("SELECT * FROM users");
     // $stmt->execute();
     // $stmt->setFetchMode(PDO::FETCH_ASSOC);
 
     // $users = $stmt->fetchAll();
 
+
+
     // $user_exist = false;
     // foreach ($users as $user) {
-    //     $upass = $user['password'];
 
+    //     $upass = $user['password'];
     //     if (password_verify($password, $upass)) {
     //         $user_exist = true;
     //         $_SESSION['user'] = $user;
@@ -78,6 +40,44 @@ if ($_POST) {
     // {
     //     $error_message = 'Please enter correct username or password.';
     // }
+
+    // if($stmt -> rowCount() > 0){
+    //     $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    //     $user = $stmt->fetchAll()[0];
+    //     $_SESSION['user'] = $user;
+
+    //     header('Location: dashboard.php');
+    // }
+    // else{
+    //     $error_message = 'please insert correct username and password';
+    // }
+
+    $stmt = $conn->prepare("SELECT * FROM users");
+    $stmt->execute();
+    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+    $users = $stmt->fetchAll();
+
+    $user_exist = false;
+    foreach ($users as $user) {
+        $upass = $user['password'];
+
+        if (password_verify($password, $upass)) {
+            $user_exist = true;
+            $_SESSION['user'] = $user;
+            break;
+        }
+    }
+
+    if($user_exist) 
+    {
+        header('Location: dashboard.php');
+    }
+
+    else 
+    {
+        $error_message = 'Please enter correct username or password.';
+    }
 }
 ?>
 <!DOCTYPE html>
