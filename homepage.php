@@ -7,7 +7,16 @@
     <title>Document</title>    
     <script src="https://use.fontawesome.com/0c7a3095b5.js"></script>
 
-
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            background-image: url(uploads/c.jpg);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+    </style>
     <link rel="stylesheet" href="css/login.css">
 </head>
 <body>

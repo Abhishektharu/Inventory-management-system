@@ -53,7 +53,7 @@ $response_message = '';
                                     <div class="column-5">
                                         <h1 class="section_header"><i class="fa fa-plus"></i> Add Product</h1>
                                         <div id="userAddFormContainer">
-                                            <form action="add.php" method="POST" class="appForm">
+                                            <form action="add.php" method="POST" class="appForm" enctype="multipart/form-data">
                                                 <div class="appFormInputContainer">
                                                     <label for="product_name">Product Name</label>
                                                     <input type="text" id="product_name" name="product_name" class="appFormInput" placeholder="Enter product name" required/>
@@ -65,6 +65,14 @@ $response_message = '';
                                                     <textarea id="description" name="description" class="appFormInput productTextAreaInput" placeholder="Enter product description">
                                                     </textarea>
                                                 </div>
+
+
+                                                <!-- product image  -->
+                                                <div class="appFormInputContainer">
+                                                    <label for="product_name">Product Image</label>
+                                                    <input type="file" name="img" />
+                                                </div>
+
                                                 <button type="submit" class="appBtn"><i class="fa fa-plus"></i> Add Product</button>
                                             </form>
                                         </div>
