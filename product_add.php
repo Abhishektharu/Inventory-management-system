@@ -4,6 +4,7 @@ session_start();
 
 if (!isset($_SESSION['user'])) header('Location: homepage.php');
 $_SESSION['table'] = 'products';
+$_SESSION['redirect_to'] = 'product_add.php';
 
 $user = $_SESSION['user'];
 $response_message = '';

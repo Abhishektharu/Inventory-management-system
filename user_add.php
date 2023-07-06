@@ -4,6 +4,8 @@ session_start();
 
 if (!isset($_SESSION['user'])) header('Location: homepage.php');
 $_SESSION['table'] = 'users';
+$_SESSION['redirect_to'] = 'user_add.php';
+
 
 $user = $_SESSION['user'];
 $response_message = '';

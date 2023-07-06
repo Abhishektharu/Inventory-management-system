@@ -11,33 +11,47 @@
     $table_name = $_SESSION['table'];
     $columns = $table_columns_mapping[$table_name];
 
-    var_dump($columns);
-    die;
+
+    //loop through the columns
+    $db_arr = [];
+    $user = $_SESSION['user'];
+
+    foreach($columns as $column){
+        // set the current date time of products;
+        if(in_array($column, ['created_at', 'updated_at'])) $value = date('Y-m-d H:i:s');
+        elseif($column == 'created_by') $value = $user['id'];
+        elseif($column == 'password') $value = password_hash($_POST[$column], PASSWORD_DEFAULT);
+        else $value = isset($_POST[$column]) ? $_POST[$column] : '';
+
+        $db_arr[$column] = $value;  
+    }
+
+
+    $table_properties = implode(", ", array_keys($db_arr));
+    $table_placeholders = ':'. implode(", :", array_keys($db_arr));
+
+
 
     //for users data
-    $first_name = $_POST['first_name'];
-    $last_name = $_POST['last_name'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    // $first_name = $_POST['first_name'];
+    // $last_name = $_POST['last_name'];
+    // $email = $_POST['email'];
+    // $password = $_POST['password'];
 
-    $encrypted = password_hash($password, PASSWORD_DEFAULT);
+    // $encrypted = password_hash($password, PASSWORD_DEFAULT);
 
     try{
 
-        $command = "INSERT INTO users(first_name, last_name, email, password, created_at, updated_at)
-     VALUES ('".$first_name. "', 
-            '".$last_name."',
-            '".$email."',
-            '".$encrypted."',
-            NOW(), 
-            NOW())";
+        $sql = "INSERT INTO $table_name($table_properties)
+     VALUES ($table_placeholders)";
             
             
             include('connection.php');
-            $conn->exec($command);
-            $response = [
+            $stmt = $conn -> prepare($sql);
+            $stmt->execute($db_arr);
+            $response =  [
                 'success' => true,
-                'message' => $first_name . ' ' .$last_name . ' successfully added to the system.'
+                'message' => $first_name . ' '. $last_name. ' successfully added.'
             ];
         }
 
@@ -50,6 +64,6 @@
         }
         
         $_SESSION['response'] = $response;
-        header('Location: user_add.php');
+        header('Location: ./' . $_SESSION['redirect_to']);
         
 ?>

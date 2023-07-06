@@ -64,6 +64,7 @@ if ($_POST) {
 
         if (password_verify($password, $upass)) {
             $user_exist = true;
+            //current session user
             $_SESSION['user'] = $user;
             break;
         }
