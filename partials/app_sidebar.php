@@ -9,12 +9,6 @@
 
     <!--menu item-->
     <ul>
-        <li>
-            <a href="#" class="btn active" >
-                <span class="icon"><i class="fas fa-home"></i></span>
-                <span class="item">Home</span>
-            </a>
-        </li>
         
         <li>
             <a href="dashboard.php" class="btn">
