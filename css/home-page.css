@@ -58,6 +58,12 @@ button{
     font-size: 15px;
     transition: all 0.3s ease 0s;
 }
+
+.contact_btn button:hover,
+header a button:hover{
+    background: rgba(15, 15, 248, 0.3);
+    box-shadow: 0 5px 15px #5e76ec;
+}
 /* ---- nav section ends ---- */
 
 

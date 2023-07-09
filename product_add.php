@@ -21,6 +21,7 @@ $response_message = '';
     <title>Product Add - Inventory Manangement System</title>
     <link rel="stylesheet" href="css/user_add.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="shortcut icon" type="x-icon" href="Vector.svg">
     <link rel="stylesheet" href="css/user_add2.css">
     <link rel="stylesheet" href="css/user_add3.css">
 

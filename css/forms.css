@@ -207,6 +207,11 @@ form .input input{
     border-radius: 10px;
 }
 
+.btn:hover{
+    background: rgba(15, 15, 248, 0.3);
+    box-shadow: 0 5px 15px #5e76ec;
+}
+
 .login .btn{
     height: 30px;
     width: 40%;
