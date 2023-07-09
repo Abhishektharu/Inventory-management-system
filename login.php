@@ -87,6 +87,7 @@ if ($_POST) {
 <head>
     <title>IMS Login - Inventory Management System</title>
     <link rel="stylesheet" type="text/css" href="css/forms.css">
+    <link rel="shortcut icon" type="x-icon" href="Vector.svg">
     <style>
         div#errorMessage {
             background-color: #fff;

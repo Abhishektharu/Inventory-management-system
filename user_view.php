@@ -22,6 +22,7 @@ $users = include('show_users.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory Manangement System</title>
     <link rel="stylesheet" href="css/user_add.css">
+    <link rel="shortcut icon" type="x-icon" href="Vector.svg">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <link rel="stylesheet" href="css/user_add2.css">
 
