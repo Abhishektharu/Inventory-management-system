@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing: border-box;
+    font-family: 'poppins', 'sans-serif';
+}
+
+body{
+    height: 100vh;
+    /* width: 100%*/
+    background-color: #ebe4e4;
+    background-color: #fff;
+}
+
+/* ---- nav section start ---- */
+header{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 30px 50px;
+    /* border: 1px solid red; */
+}
+
+.logo{
+    cursor: pointer;
+    margin-right: auto;
+}
+
+.nav_links{
+    list-style: none;
+}
+
+.nav_links li{
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.nav_links li a{
+    text-decoration: none;
+    color: blue;
+    font-size: 20px;
+    transition: all 0.3s ease 0s;
+}
+
+.nav_links li a:hover{
+    color: #4e50fb;
+}
+
+button{
+    padding: 9px 25px;
+    background-color: #4e50fb;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    font-size: 15px;
+    transition: all 0.3s ease 0s;
+}
+/* ---- nav section ends ---- */
+
+
+/* ---- image and text section start ---- */
+/* .section{
+    background: lightslategray;
+} */
+
+.section .text{
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+}
+
+.section img{
+    height: 500px;
+}
+
+.section h1{
+    margin: 0;
+    color: #4e50fb;
+}
+
+.contact_btn{
+    margin-top: 30px;
+}
+
+.social_icons{
+    margin-top: 60px;
+    font-size: 40px;
+}
+
+.social_icons a{
+    text-decoration: none;
+}
+/* ---- nav section ends ---- */
+
