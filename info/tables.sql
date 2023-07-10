@@ -1,13 +1,24 @@
+use inventory;
+create table users(
+id int primary key auto_increment,
+first_name varchar(50),
+last_name varchar(50),
+password varchar(100),
+email varchar(50),
+created_at DateTime,
+updated_at DateTime
+
+);
 create table products(
 id int primary key auto_increment,
 product_name varchar(50),
 created_by int,
 created_at DateTime,
-updated_at DateTime
+updated_at DateTime,
 
+	
+    FOREIGN KEY(created_by) REFERENCES users(id)
 )
-
-ALTER TABLE `products` ADD CONSTRAINT `fk_created_by` FOREIGN KEY (`created_by`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 
 CREATE TABLE stocks(
