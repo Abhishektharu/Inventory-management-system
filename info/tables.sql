@@ -12,9 +12,18 @@ updated_at DateTime
 create table products(
 id int primary key auto_increment,
 product_name varchar(50),
+
+--create in xampp--
+description varchar(50) not null,
+img varchar(50) not null,
+-------------------------
+
 created_by int,
 created_at DateTime,
 updated_at DateTime,
+description varchar(50) not null,
+img varchar(50) not null,
+
 
 	
     FOREIGN KEY(created_by) REFERENCES users(id)

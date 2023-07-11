@@ -1,3 +1,6 @@
+<?php
+    $user = $_SESSION['user'];
+?>
 <div class="sidebar" id="navbar">
 
     <!--profile image & text-->
@@ -27,7 +30,7 @@
 
             <!-- subMenus css is written in user_add2.css -->
             <ul class="subMenus" >
-                <li><a class="subMenuLink" href="#"><i class="fa fa-circle"></i> View Product</a></li>
+                <li><a class="subMenuLink" href="./product_view.php"><i class="fa fa-circle"></i> View Product</a></li>
                 <li><a class="subMenuLink" href="./product_add.php"><i class="fa fa-circle"></i> Add Product</a></li>
             </ul>
         </li>

@@ -64,7 +64,7 @@ $users = include('show_users.php');
                                                             <th>Last Name</th>
                                                             <th>Email</th>
                                                             <th>Created At</th>
-                                                            <th>Upadated At</th>
+                                                            <th>Updated At</th>
                                                             <th>Option</th>
                                                         </tr>
                                                     </thead>
