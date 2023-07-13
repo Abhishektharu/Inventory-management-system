@@ -8,9 +8,12 @@ $_SESSION['table'] = 'users';
 $user = $_SESSION['user'];
 $response_message = '';
 
-$users = include('show_users.php');
-// var_dump($users);
-// die;
+
+// session of products
+$_SESSION['table'] = 'users';
+$users = include('database/show_product.php');
+
+
 ?>
 
 <!DOCTYPE html>
@@ -152,11 +155,10 @@ $users = include('show_users.php');
                             $.ajax({
                                 method: 'POST',
                                 data: {
-                                    user_id: userId,
-                                    f_name: fname,
-                                    l_name: lname
+                                    id: userId,
+                                    table: 'users'
                                 },
-                                url: 'database/delete_user.php',
+                                url: 'database/delete.php',
                                 dataType: 'json',
                                 success: function(data){
                                     //from delete_user success = true;

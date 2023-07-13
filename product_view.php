@@ -28,8 +28,8 @@ $response_message = '';
     <!-- <link rel="stylesheet" href="css/user_add3.css"> -->
     <style>
         .productImages{
-            height: 50px;
-            width: 50px;
+            height: 25px;
+            width: 25px;
             border-radius: 5px;
         }
     </style>
@@ -85,12 +85,12 @@ $response_message = '';
                                                             <tr>
                                                                 <td><?= $index + 1 ?></td>
                                                                 <!-- //image section  -->
-                                                                <td>
+                                                                <td class="firstName">
                                                                     <!-- css written in internal css of product_view.php -->
                                                                 <img class="productImages" src= "uploads/products/<?= $product['img'] ?>" alt=""/>
                                                                 </td>
-                                                                <td><?= $product['product_name'] ?></td>
-                                                                <td><?= $product['description'] ?></td>
+                                                                <td class="lastName"><?= $product['product_name'] ?></td>
+                                                                <td class="email"><?= $product['description'] ?></td>
                                                                 <td><?= $product['created_by'] ?></td>
                                                                 <!-- set month day year using php  -->
                                                                 <td><?= date('M d, Y @ h:i:s A', strtotime($product['created_at'])) ?></td>
@@ -101,8 +101,10 @@ $response_message = '';
                                                                 <td>
                                                                     <!-- <a href=""><i class="fa fa-pencil"></i>Edit</a> -->
 
-                                                                    <a href="" class="deleteUser" data-userid="<?= $user['id'] ?>" data-fname="<?= $user['first_name'] ?>" data-lname="<?= $user['last_name'] ?>"> <i class="fa fa-trash"></i>Delete</a>
+                                                                    <!-- <a href="" class="deleteProduct" data-pid="<?= $product['product_name'] ?>" data-fname="<?= $user['first_name'] ?>" data-lname="<?= $user['last_name'] ?>"> <i class="fa fa-trash"></i>Delete</a> -->
+                                                                    <a href="" class="deleteProduct" data-name="<?= $product['product_name'] ?>" data-pid="<?= $product['id'] ?>"> <i class="fa fa-trash"></i>Delete</a>
                                                                 </td>
+
                                                             </tr>
                                                         <?php } ?>
                                                     </tbody>
@@ -144,6 +146,65 @@ $response_message = '';
 </body>
 <script src="js/script.js"></script>
 <script src="js/jquery/jquery-3.7.0.min.js"></script>
+
+<script>
+    // delete product
+    function script(){
+
+        this.registerEvents = function() {
+                document.addEventListener('click', function(e) {
+                    // alert('clicked');
+                    // return false;
+                    targetElement = e.target; //target element
+                    classList = targetElement.classList; // returns class
+
+
+
+                    if (classList.contains('deleteProduct')) {
+                        e.preventDefault();
+
+                        pId = targetElement.dataset.pid;
+                        pName = targetElement.dataset.name;
+                        
+
+
+
+                        if (window.confirm('Are you sure to delete '  + pName + ' ?')) {
+
+                            $.ajax({
+                                method: 'POST',
+                                data: {
+                                    id: pId,
+                                    table: 'products'
+                                },
+
+                                url: 'database/delete.php',
+                                dataType: 'json',
+                                success: function(data){
+                                    if(data.success){
+                                        if(window.confirm(data.message)){
+                                            location.reload();
+                                        }
+                                    }
+                                    else window.alert(data.message);
+                                }
+                            })
+                        } else {
+                            console.log("not delete");
+                        }
+                    }
+                });
+            }
+
+
+
+        this.initialize = function(){
+            this.registerEvents();
+        }
+    }
+    var script = new script;
+    script.initialize();
+</script>
 
 
 </html>
