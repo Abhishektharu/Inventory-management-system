@@ -8,7 +8,7 @@ $_SESSION['redirect_to'] = 'product_add.php';
 
 $user = $_SESSION['user'];
 $response_message = '';
-    
+
 ?>
 
 <!DOCTYPE html>

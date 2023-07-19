@@ -91,7 +91,35 @@ $response_message = '';
                                                                 </td>
                                                                 <td class="lastName"><?= $product['product_name'] ?></td>
                                                                 <td class="email"><?= $product['description'] ?></td>
-                                                                <td><?= $product['created_by'] ?></td>
+
+                                                                <td>
+                                                                    
+                                                                    <!-- // $pid = $product['created_by'] ;
+                                                                    // $stmt = $conn-> prepare("SELECT * FROM users WHERE id = $pid");
+                                                                    // $stmt-> execute();
+                                                                    // $row = $stmt-> fetch(PDO::FETCH_ASSOC);
+
+                                                                    // $created_by_name = $row['first_name']. ' '. $row['last_name'];
+
+                                                                    // echo $created_by_name; -->
+
+                                                                    <?php
+                                                                        $pid = $product['created_by'];
+                                                                        $stmt = $conn->prepare("SELECT * FROM users WHERE id = :pid");
+                                                                        $stmt->bindParam(':pid', $pid);
+                                                                        $stmt->execute();
+
+                                                                        if ($stmt->rowCount() > 0) {
+                                                                            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                                                                            $created_by_name = $row['first_name'] . ' ' . $row['last_name'];
+                                                                            echo $created_by_name;
+                                                                        } else {
+                                                                            echo "User not found";
+                                                                        }
+                                                                    ?>
+
+                                                                </td>
+
                                                                 <!-- set month day year using php  -->
                                                                 <td><?= date('M d, Y @ h:i:s A', strtotime($product['created_at'])) ?></td>
                                                                 <td><?= date('M d, Y @ h:i:s A', strtotime($product['updated_at'])) ?></td>
@@ -99,7 +127,7 @@ $response_message = '';
 
                                                                 <!-- adding edit and delete option` -->
                                                                 <td>
-                                                                    <!-- <a href=""><i class="fa fa-pencil"></i>Edit</a> -->
+                                                                    <a href=""><i class="fa fa-pencil"></i>Edit</a>
 
                                                                     <!-- <a href="" class="deleteProduct" data-pid="<?= $product['product_name'] ?>" data-fname="<?= $user['first_name'] ?>" data-lname="<?= $user['last_name'] ?>"> <i class="fa fa-trash"></i>Delete</a> -->
                                                                     <a href="" class="deleteProduct" data-name="<?= $product['product_name'] ?>" data-pid="<?= $product['id'] ?>"> <i class="fa fa-trash"></i>Delete</a>

@@ -140,7 +140,7 @@ if ($_POST) {
             <div class="text">Login</div>
             <form action="login.php" method="post">
                 <div class="input">
-                    <label for="username">Username</label>
+                    <label for="username">email</label>
                     <input type="text" name="username" placeholder="username" required >
                 </div>
 

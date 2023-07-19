@@ -43,7 +43,6 @@ $user = $_SESSION['user'];
             <!-- container main -->
             <div class="container"> nobis, delectus asperiores autem ab et placeat ducimus dolor nulla!
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae explicabo voluptate doloribus, blanditiis quidem id aliquid laboriosam dicta ipsum! Harum fugit illo, magni earum nisi eos ab tenetur aliquid molestiae. Commodi, repudiandae dolor.
-
             </div>
         </div>
         <?php
