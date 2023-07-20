@@ -2,11 +2,12 @@
 //start the session.
 session_start();
 
-if (!isset($_SESSION['user'])) header('Location: homepage.php');
-$_SESSION['table'] = 'products';
+if (!isset($_SESSION['user'])) header('Location: login.php');
+
+$show_table = 'products';
 
 
-$products = include('database/show_product.php');
+$products = include('database/show.php');
 // var_dump($products);
 // die;
 
@@ -71,6 +72,7 @@ $response_message = '';
                                                             <th>Image</th>
                                                             <th>Product Name</th>
                                                             <th>Description</th>
+                                                            <th>Supplier</th>
                                                             <th>created by</th>
                                                             <th>Created At</th>
                                                             <th>Updated At</th>
@@ -91,6 +93,24 @@ $response_message = '';
                                                                 </td>
                                                                 <td class="lastName"><?= $product['product_name'] ?></td>
                                                                 <td class="email"><?= $product['description'] ?></td>
+                                                                <td class="email">
+                                                                    <?php
+
+                                                                        $supplier_list = '-';
+
+                                                                        $pid = $product['id'] ;
+                                                                        $stmt = $conn-> prepare("SELECT supplier_name FROM suppliers, product_suppliers WHERE product_suppliers.product = $pid AND product_suppliers.supplier = suppliers.id");
+                                                                        $stmt-> execute();
+                                                                        $row = $stmt-> fetchAll(PDO::FETCH_ASSOC);
+
+                                                                        if($row){
+                                                                            $supplier_arr = array_column($row, 'supplier_name');
+                                                                            $supplier_list = '<li>'. implode("</li><li>", $supplier_arr);
+                                                                        }
+                                                                        echo $supplier_list;
+
+                                                                    ?>
+                                                                </td>
 
                                                                 <td>
                                                                     
@@ -104,9 +124,9 @@ $response_message = '';
                                                                     // echo $created_by_name; -->
 
                                                                     <?php
-                                                                        $pid = $product['created_by'];
-                                                                        $stmt = $conn->prepare("SELECT * FROM users WHERE id = :pid");
-                                                                        $stmt->bindParam(':pid', $pid);
+                                                                        $uid = $product['created_by'];
+                                                                        $stmt = $conn->prepare("SELECT * FROM users WHERE id = :uid");
+                                                                        $stmt->bindParam(':uid', $uid);
                                                                         $stmt->execute();
 
                                                                         if ($stmt->rowCount() > 0) {
@@ -127,7 +147,7 @@ $response_message = '';
 
                                                                 <!-- adding edit and delete option` -->
                                                                 <td>
-                                                                    <a href=""><i class="fa fa-pencil"></i>Edit</a>
+                                                                    <!-- <a href=""><i class="fa fa-pencil"></i>Edit</a> -->
 
                                                                     <!-- <a href="" class="deleteProduct" data-pid="<?= $product['product_name'] ?>" data-fname="<?= $user['first_name'] ?>" data-lname="<?= $user['last_name'] ?>"> <i class="fa fa-trash"></i>Delete</a> -->
                                                                     <a href="" class="deleteProduct" data-name="<?= $product['product_name'] ?>" data-pid="<?= $product['id'] ?>"> <i class="fa fa-trash"></i>Delete</a>

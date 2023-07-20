@@ -7,11 +7,12 @@ $_SESSION['table'] = 'users';
 $_SESSION['redirect_to'] = 'user_add.php';
 
 
-$user = $_SESSION['user'];
-$response_message = '';
+// $user = $_SESSION['user'];
+$show_table = 'users';
 
-$users = include('show_users.php');
+$users = include('database/show.php');
 // var_dump($users);
+$response_message = '';
 // die;
 ?>
 

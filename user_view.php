@@ -4,15 +4,15 @@ session_start();
 
 if (!isset($_SESSION['user'])) header('Location: homepage.php');
 $_SESSION['table'] = 'users';
-
 $user = $_SESSION['user'];
-$response_message = '';
 
+$show_table = 'users';
 
 // session of products
 $_SESSION['table'] = 'users';
-$users = include('database/show_product.php');
+$users = include('database/show.php');
 
+$response_message = '';
 
 ?>
 
