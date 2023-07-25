@@ -95,6 +95,33 @@
 
 
 
+        
+            $product_id = $conn->lastInsertId();
+
+            if($table_name === 'products'){
+                //if not empty
+                $suppliers = isset($_POST['suppliers']) ? $_POST['suppliers']: [];
+                if($suppliers){
+                    //loop through the suppliers and add record
+                    foreach ($suppliers as $supplier) {
+                        $supplier_data = [
+                            'supplier_id' => $supplier,
+                            'product_id' => $product_id,
+                            'updated_at' => date('Y-m-d H:i:s'),
+                            'created_at' => date('Y-m-d H:i:s')
+                        ];
+
+                        $sql = "INSERT INTO product_suppliers(supplier, product, updated_at, created_at)
+                        VALUES (:supplier_id,:product_id, :updated_at, :created_at)";
+                               
+                        $stmt = $conn->prepare($sql);
+                        $stmt->execute($supplier_data);
+                    }
+                }
+            }
+
+
+
             $response =  [
                 'success' => true,
                 'message' => $first_name . ' '. $last_name. ' successfully added.'

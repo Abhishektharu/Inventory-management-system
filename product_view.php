@@ -8,6 +8,7 @@ $show_table = 'products';
 
 
 $products = include('database/show.php');
+$products = include('database/show.php');
 // var_dump($products);
 // die;
 
@@ -72,6 +73,7 @@ $response_message = '';
                                                             <th>Image</th>
                                                             <th>Product Name</th>
                                                             <th>Description</th>
+                                                            <th>Supplier</th>
                                                             <th>Supplier</th>
                                                             <th>created by</th>
                                                             <th>Created At</th>
