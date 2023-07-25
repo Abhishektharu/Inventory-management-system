@@ -4,20 +4,22 @@
     $id = (int) $data['id'];
     $table = $data['table'];
 
-    
-    try{
+
+
+    try{    
+        include('connection.php');
+
+        //for foreign key supplier to product_supplier table
+        if($table === 'suppliers'){
+            $suppplier_id = $id;
+            $command = "DELETE FROM $table WHERE id= {$id}";
+            $conn-> exec($command);
+        }
 
         $command = "DELETE FROM $table WHERE id= {$id}";
             
-            include('connection.php');
 
             $conn->exec($command);
-            // The json_encode() function is used to encode a value to JSON format.
-            // $age = array("Peter"=>35, "Ben"=>37, "Joe"=>43);
-
-            // echo json_encode($age);
-            //
-            // {"Peter":35,"Ben":37,"Joe":43} 
 
             echo json_encode([
                 'success' => true,

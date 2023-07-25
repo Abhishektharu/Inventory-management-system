@@ -109,28 +109,6 @@ if ($_POST) {
     <?php }
 
     ?>
-    <!-- <div class="container">
-        <div class="loginHeader">
-            <h1>XYZ COMPANY</h1>
-            <p>Inventory Management System</p>
-        </div>
-        <div class="loginBody">
-            <form action="login.php" method="POST">
-                <div class="loginInputsContainer">
-                    <label for="username">Username</label>
-                    <input placeholder="username" name="username" type="text" />
-                </div>
-                <div class="loginInputsContainer">
-                    <label for="password">Password</label>
-                    <input placeholder="password" name="password" type="password" />
-                </div>
-                <div class="loginButtonContainer">
-                    <button>login</button>
-                </div>
-
-            </form>
-        </div>
-    </div> -->
     <div class="content">
         <div class="image-box">
             <img src="ims.png" alt="Image">
@@ -140,7 +118,7 @@ if ($_POST) {
             <div class="text">Login</div>
             <form action="login.php" method="post">
                 <div class="input">
-                    <label for="username">Username</label>
+                    <label for="username">email</label>
                     <input type="text" name="username" placeholder="username" required >
                 </div>
 

@@ -7,8 +7,9 @@ $_SESSION['table'] = 'products';
 $_SESSION['redirect_to'] = 'product_add.php';
 
 $user = $_SESSION['user'];
+// $show_table = 'suppliers';
 $response_message = '';
-    
+
 ?>
 
 <!DOCTYPE html>
@@ -23,8 +24,6 @@ $response_message = '';
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <link rel="shortcut icon" type="x-icon" href="Vector.svg">
     <link rel="stylesheet" href="css/user_add2.css">
-    <link rel="stylesheet" href="css/user_add3.css">
-
 
 </head>
 
@@ -67,6 +66,22 @@ $response_message = '';
                                                     </textarea>
                                                 </div>
 
+                                                <div class="appFormInputContainer">
+                                                    <label for="description">Suppliers</label>
+                                                    <select name="suppliers[]" id="suppliersSelect" multiple="">      
+                                                        <!-- css written in internal css -->
+                                                        <option value="">Select Supplier</option>
+                                                        <?php
+                                                            $show_table = 'suppliers';
+                                                            $suppliers = include('database/show.php');
+
+                                                            foreach($suppliers as $supplier){
+                                                                echo "<option value='". $supplier['id']. "'> ". $supplier['supplier_name']. "</option>";
+                                                            }
+
+                                                        ?>
+                                                    </select>
+                                                </div>
 
                                                 <!-- product image  -->
                                                 <div class="appFormInputContainer">

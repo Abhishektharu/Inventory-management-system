@@ -5,7 +5,7 @@
 
     <!--profile image & text-->
     <div class="profile">
-        <img src="https://1.bp.blogspot.com/-vhmWFWO2r8U/YLjr2A57toI/AAAAAAAACO4/0GBonlEZPmAiQW4uvkCTm5LvlJVd_-l_wCNcBGAsYHQ/s16000/team-1-2.jpg"
+        <img src="unnamed1.png"
                     alt="profile_picture">
         <h3><?= $user['first_name'] ?></h3>
     </div>
@@ -38,14 +38,14 @@
         <li class="liMainMenu showHideSubMenu" >
             <a href="javascript:void(0);" class="showHideSubMenu" >
                 <span class="icon"><i class="fas fa-truck showHideSubMenu" ></i></span>
-                <span class="showHideSubMenu"  >Supplier</span>
+                <span class="showHideSubMenu" >Supplier</span>
                 <i class="fa fa-angle-down mainMenuIconArrow showHideSubMenu" ></i>
             </a>
 
             <!-- subMenus css is written in user_add2.css -->
             <ul class="subMenus" >
-                <li><a class="subMenuLink" href="#"><i class="fa fa-circle"></i> View Supplier</a></li>
-                <li><a class="subMenuLink" href="#"><i class="fa fa-circle"></i> Add Supplier</a></li>
+                <li><a class="subMenuLink" href="./supplier_view.php"><i class="fa fa-circle"></i> View Supplier</a></li>
+                <li><a class="subMenuLink" href="./supplier_add.php"><i class="fa fa-circle"></i> Add Supplier</a></li>
             </ul>
         </li>
 

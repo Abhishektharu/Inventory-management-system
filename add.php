@@ -1,22 +1,15 @@
 <?php
+//will add the columns in the database.
     session_start();
 
     //capture the table mapping for all the columns
     include('database/table_columns.php');
-    // var_dump($table_columns_mapping);
-    // die;
-    
-    // image data
-    // var_dump($_POST);
-    // var_dump($_FILES);
-    // die;
-
-
 
 
     //extract product columns from session
     $table_name = $_SESSION['table'];
     $columns = $table_columns_mapping[$table_name];
+    var_dump($table_name);
 
 
     //loop through the columns
@@ -28,6 +21,7 @@
         if(in_array($column, ['created_at', 'updated_at'])) $value = date('Y-m-d H:i:s');
         elseif($column == 'created_by') $value = $user['id'];
         elseif($column == 'password') $value = password_hash($_POST[$column], PASSWORD_DEFAULT);
+        
         elseif($column == 'img'){
 
             //upload or move the file to directory uploads/products
@@ -63,13 +57,7 @@
 
 
 
-    //for users data
-    // $first_name = $_POST['first_name'];
-    // $last_name = $_POST['last_name'];
-    // $email = $_POST['email'];
-    // $password = $_POST['password'];
 
-    // $encrypted = password_hash($password, PASSWORD_DEFAULT);
 
     try{
 
@@ -80,6 +68,33 @@
             include('connection.php');
             $stmt = $conn -> prepare($sql);
             $stmt->execute($db_arr);
+        
+            $product_id = $conn->lastInsertId();
+
+            if($table_name === 'products'){
+                //if not empty
+                $suppliers = isset($_POST['suppliers']) ? $_POST['suppliers']: [];
+                if($suppliers){
+                    //loop through the suppliers and add record
+                    foreach ($suppliers as $supplier) {
+                        $supplier_data = [
+                            'supplier_id' => $supplier,
+                            'product_id' => $product_id,
+                            'updated_at' => date('Y-m-d H:i:s'),
+                            'created_at' => date('Y-m-d H:i:s')
+                        ];
+
+                        $sql = "INSERT INTO product_suppliers(supplier, product, updated_at, created_at)
+                        VALUES (:supplier_id,:product_id, :updated_at, :created_at)";
+                               
+                        $stmt = $conn->prepare($sql);
+                        $stmt->execute($supplier_data);
+                    }
+                }
+            }
+
+
+
             $response =  [
                 'success' => true,
                 'message' => $first_name . ' '. $last_name. ' successfully added.'
