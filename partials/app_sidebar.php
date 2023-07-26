@@ -32,6 +32,7 @@
             <ul class="subMenus" >
                 <li><a class="subMenuLink" href="./product_view.php"><i class="fa fa-circle"></i> View Product</a></li>
                 <li><a class="subMenuLink" href="./product_add.php"><i class="fa fa-circle"></i> Add Product</a></li>
+                <li><a class="subMenuLink" href="./product_order.php"><i class="fa fa-circle"></i> Order Product</a></li>
             </ul>
         </li>
 

@@ -74,7 +74,6 @@ $response_message = '';
                                                             <th>Product Name</th>
                                                             <th>Description</th>
                                                             <th>Supplier</th>
-                                                            <th>Supplier</th>
                                                             <th>created by</th>
                                                             <th>Created At</th>
                                                             <th>Updated At</th>

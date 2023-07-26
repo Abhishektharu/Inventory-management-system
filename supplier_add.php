@@ -7,7 +7,6 @@ $_SESSION['table'] = 'suppliers';
 $_SESSION['redirect_to'] = 'supplier_add.php';
 
 $user = $_SESSION['user'];
-// $show_table = 'suppliers';
 $response_message = '';
 
 ?>

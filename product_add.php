@@ -2,7 +2,7 @@
 //start the session.
 session_start();
 
-if (!isset($_SESSION['user'])) header('Location: homepage.php');
+if (!isset($_SESSION['user'])) header('Location: login.php');
 $_SESSION['table'] = 'products';
 $_SESSION['redirect_to'] = 'product_add.php';
 

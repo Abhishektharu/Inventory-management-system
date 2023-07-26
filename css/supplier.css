@@ -1,0 +1,53 @@
+.orderProductBtn{
+    font-size: 15px;
+    border-radius: 5px;
+    color: white;
+    background: #106bc7;
+    height: 35px;
+    border: none;
+}
+
+.alignRight{
+    text-align: right;
+}
+
+#orderProductLists{
+    margin-top: 20px;
+}
+.productNameSelect{
+    border: 2px black;
+    border-radius: 3px;
+    margin-right: 0px;
+    margin-left: 5px;
+    height: 30px;
+    width: 30%;
+}
+.orderProductRow{
+    border-bottom: solid green 1px;
+    padding: 7px;
+    padding-bottom: 25px;
+}
+
+#orderProductLists .row{
+    margin: 0px !important;
+}
+
+.suppliersRows .row{
+    padding: 20px 0px;
+}
+
+.supplierName{
+    color: #573c3c;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.orderBtn{
+        border-radius: 5px;
+        background: #352727;
+        color: white;
+        height: 30px
+}
+.marginBtn{
+    padding-top: 20px;
+}
