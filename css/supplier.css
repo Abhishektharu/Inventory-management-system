@@ -21,6 +21,8 @@
     margin-left: 5px;
     height: 30px;
     width: 30%;
+    padding: 2px 20px;
+
 }
 .orderProductRow{
     border-bottom: solid green 1px;
@@ -47,8 +49,19 @@
         border-radius: 5px;
         background: #352727;
         color: white;
+        padding: 2px 20px;
+
         height: 30px
 }
 .marginBtn{
     padding-top: 20px;
+}
+.appBtn{
+    height: 30px;
+    background: #f65177;
+    color: white;
+    padding: 2px 20px;
+    border: none;
+    border-radius: 5px;
+    float: right;
 }

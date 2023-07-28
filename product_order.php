@@ -94,6 +94,7 @@ $response_message = '';
                                                             <option>select product</option>\
                                                             INSERTPRODUCT\
                                             </select>\
+                                        <button class="appBtn removeOrderBtn">Remove</button>\
                                     </div>\
             ';
 
@@ -129,7 +130,18 @@ $response_message = '';
                         </div>';
                         counter = counter + 1;
                         }
+
+                        // for remove button
+                        if(targetElement.classList.contains('removeOrderBtn')){
+                            let orderRow = targetElement.closest('div.orderProductRow');
+                            
+                            //remove the element
+                            orderRow.remove();
+                            
+                    }
                     });
+
+                    
 
                     document.addEventListener('change', function(e) {
                         targetElement = e.target;

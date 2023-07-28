@@ -139,7 +139,7 @@ $response_message = '';
 
                                                                 <!-- adding edit and delete option` -->
                                                                 <td>
-                                                                    <!-- <a href=""><i class="fa fa-pencil"></i>Edit</a> -->
+                                                                    <a href=""><i class="fa fa-pencil"></i>Edit</a>
 
                                                                     <a href="" class="deleteProduct" data-name="<?= $product['product_name'] ?>" data-pid="<?= $product['id'] ?>"> <i class="fa fa-trash"></i>Delete</a>
                                                                 </td>
