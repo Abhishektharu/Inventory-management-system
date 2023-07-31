@@ -53,17 +53,34 @@ $response_message = '';
                                 <div class="row">
                                     <div class="column-5">
                                         <h1 class="section_header"><i class="fa fa-plus"></i> Order Product</h1>
-                                        <div class="alignRight">
-                                            <button class="orderBtn orderProductBtn" id="orderProductBtn">Add another Product Order </button>
-                                        </div>
-                                        <div id="orderProductLists">
+                                        <form action='database/save_order.php' method="POST">
+                                            <div class="alignRight">
+                                                <button type="button" class="orderBtn orderProductBtn" id="orderProductBtn">Add another Product Order </button>
+                                            </div>
 
-                                        </div>
+                                            <div id="orderProductLists">
+                                                <p id="noData" style="color: black">No Product Selected</p>
+                                            </div>
 
-                                        <div class="alignRight marginBtn">
-                                            <button class="orderBtn">Submit Order</button>
-                                        </div>
+                                            <div class="alignRight marginBtn">
+                                                <button type="submit" class="orderBtn">Submit Order</button>
+                                            </div>
+                                        </form>
                                     </div>
+                                    <?php 
+                                        if(isset($_SESSION['response'])){
+                                            $response_message = $_SESSION['response']['message'];
+                                            $is_success = $_SESSION['response']['success'];
+                                        
+                                    ?>
+
+                                        <div class="responseMessage">
+                                            <p class="responseMessage<?= $is_success ? ' responseMessage_success' : 
+                                            'responseMessage_error' ?>" >
+                                            <?= $response_message ?>
+                                            </p>
+                                        </div>
+                                        <?php unset($_SESSION['response']); } ?>
                                 </div>
                             </div>
                         </div>
@@ -90,7 +107,7 @@ $response_message = '';
             let productOptions = '\
                                     <div>\
                                         <label for="product_name" >Product Name  </label>\
-                                            <select name="product_name" id="product_name"class="productNameSelect">\
+                                            <select name="products[]" id="product_name"class="productNameSelect">\
                                                             <option>select product</option>\
                                                             INSERTPRODUCT\
                                             </select>\
@@ -121,8 +138,9 @@ $response_message = '';
                         classList = targetElement.classList; //gives us class
 
                         if (targetElement.id === 'orderProductBtn') {
-                            let orderProductListsContainer = document.getElementById('orderProductLists');
+                            document.getElementById('noData').style.display = 'none';
 
+                            let orderProductListsContainer = document.getElementById('orderProductLists');
                             orderProductLists.innerHTML += '\
                         <div class="orderProductRow">\
                             ' + productOptions + '\
@@ -169,8 +187,8 @@ $response_message = '';
                                         <p class="supplierName">'+ supplier.supplier_name + ' </p>\
                                         </div>\
                                         <div style="width: 50%;">\
-                                            <label for="product_name" >Quantity: </label>\
-                                            <input type="number" class="appFormInput" id="product_quantity" placeholder="Enter product name .." name="product_name" />\
+                                            <label for="quantity" >Quantity: </label>\
+                                            <input type="number" class="appFormInput orderProductQty" id="quantity" placeholder="Enter product name .." name="quantity[' + counterId + '][' + supplier.id + ']" />\
                                         </div>\
                                         </div>';
                     });
