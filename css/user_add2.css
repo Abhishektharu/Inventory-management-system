@@ -40,7 +40,14 @@ td {
     text-align: center;
 
 }
+.poList table,
+th,
+td {
+    border: solid 2px #090224;
+    border-collapse: collapse;
+    text-align: center;
 
+}
 table{
     width: 100%;
 }
@@ -113,5 +120,41 @@ i.mainMenuIconArrow{
     border-radius: 5px;
 }
 
+.poList{
+    margin-bottom: 30px;
+}
 
+.poList p{
+    font-weight: bold;
+    color: red;
+    text-transform: uppercase;
+    font-size: 20px;
+}
 
+.updatePoBtn{    
+    color: black;
+    background: #ffff;
+    border: 1px solid #f690bf;
+    padding: 2px 20px;
+    margin-top: 6px;
+    border-radius: 5px
+}
+.updatePoBtn:hover{
+    color: white;
+    background: #f690bf;
+}
+
+.po-badge{
+    padding: 1px 20px;
+}
+
+.po-badge-pending{
+    background: #fd97a8;
+    border: 1px solid #eae3e3;
+}
+
+.po-badge-complete{
+    background-color: #6ad26a;
+    border: 1px solid #eae3e3;
+
+}
