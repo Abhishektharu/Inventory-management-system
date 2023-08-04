@@ -209,7 +209,6 @@ $response_message = '';
 
 
                         if (window.confirm('Are you sure to delete '  + pName + ' ?')) {
-
                             $.ajax({
                                 method: 'POST',
                                 data: {

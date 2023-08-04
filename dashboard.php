@@ -4,8 +4,10 @@ session_start();
 
 if (!isset($_SESSION['user'])) header('Location: homepage.php');
 $user = $_SESSION['user'];
-?>
+include('database/product_order_status_pie.php');
 
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,20 +21,20 @@ $user = $_SESSION['user'];
     <link rel="stylesheet" href="css/sidebar.css">
     <link rel="stylesheet" href="css/user_add2.css">
     <style>
-        .wrapper .section .container {
+        .wrapper .section .main_container {
             margin: 30px;
             background: #fff;
             padding: 50px;
             line-height: 28px;
             color: green;
         }
+
+        
     </style>
 </head>
 
 <body>
     <div class="wrapper">
-
-
         <!--Top menu -->
         <div class="section">
             <?php
@@ -41,7 +43,16 @@ $user = $_SESSION['user'];
 
 
             <!-- container main -->
-            <div class="container">Welcome to Dashboard
+            <div class="main_container">
+                <div class="dashboard_content_main">
+                    <figure class="highcharts-figure">
+                        <div id="container"></div>
+                        <p class="highcharts-description">This pie chart shows the current status of products that have been ordered.
+                            This includes the products that have been pending , incomplete to deliver or the delivery is completed.
+                        </p>
+                    </figure>
+
+                </div>
             </div>
         </div>
         <?php
@@ -50,6 +61,55 @@ $user = $_SESSION['user'];
     </div>
 
     <script src="js/script.js"></script>
+
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<script>
+    
+    var graphData = <?= json_encode($results) ?>;
+    console.log(graphData),
+
+Highcharts.chart('container', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Purchase Orders by Status',
+        align: 'left'
+    },
+    tooltip: {
+        pointFormatter: function(){
+            var point = this,
+                series = point.series;
+
+            return `<b>${point.name}</b>: <b>${point.y}</b>`
+        }
+
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.percentage:.2f} %'
+            }
+        }
+    },
+    series: [{
+        name: 'Status',
+        colorByPoint: true,
+        data: graphData
+    }]
+});
+</script>
 </body>
 
 </html>
