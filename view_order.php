@@ -240,32 +240,7 @@ $response_message = '';
                     });
 
                     poListHtml += '</tbody></table>';
-                    console.log(poListHtml);
-                    
-
-
-
-                    // if (window.confirm('Are you sure to delete ' + pName + ' ?')) {
-                    //     $.ajax({
-                    //         method: 'POST',
-                    //         data: {
-                    //             id: pId,
-                    //             table: 'products'
-                    //         },
-
-                    //         url: 'database/delete.php',
-                    //         dataType: 'json',
-                    //         success: function(data) {
-                    //             if (data.success) {
-                    //                 if (window.confirm(data.message)) {
-                    //                     location.reload();
-                    //                 }
-                    //             } else window.alert(data.message);
-                    //         }
-                    //     })
-                    // } else {
-                    //     console.log("not delete");
-                    // }
+                    // console.log(poListHtml);
                 }
 
             });

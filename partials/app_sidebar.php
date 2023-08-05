@@ -6,7 +6,7 @@
     <!--profile image & text-->
     <div class="profile">
         <!-- <img src="unnamed1.png" alt="profile_picture"> -->
-        <h3><?= $user['first_name'] ?></h3>
+        <h3><?= $user['first_name'] ,$user['email']?></h3>
     </div>
 
     <!--menu item-->
