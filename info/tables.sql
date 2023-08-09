@@ -1,3 +1,4 @@
+create database inventory;
 use inventory;
 create table users(
 id int primary key auto_increment,
@@ -9,25 +10,18 @@ created_at DateTime,
 updated_at DateTime
 
 );
+
 create table products(
 id int primary key auto_increment,
 product_name varchar(50),
 
---create in xampp--
-description varchar(50) not null,
-img varchar(50) not null,
--------------------------
-
-created_by int,
+description varchar(50) ,
+img varchar(50) ,
+created_by varchar(50),
 created_at DateTime,
-updated_at DateTime,
-description varchar(50) not null,
-img varchar(50) not null,
+updated_at DateTime
 
-
-	
-    FOREIGN KEY(created_by) REFERENCES users(id)
-)
+);
 
 
 CREATE TABLE stocks(
@@ -44,19 +38,19 @@ CREATE TABLE stocks(
     FOREIGN KEY(created_by) REFERENCES users(id)
     
 );
-create table supplier(
+create table suppliers(
 id int primary key auto_increment,
 supplier_name varchar(50),
 supplier_location varchar(50),
 email varchar(50),
-created_by integer,
+created_by varchar(50),
 created_at DateTime,
-updated_at DateTime,
+updated_at DateTime
 
-foreign key(created_by) references users(id)
-)
+-- foreign key(created_by) references users(id)-- 
+);
 
-create table product_supplier(
+create table order_product(
     id INTEGER,
     supplier INTEGER,
     product INTEGER,
@@ -64,15 +58,27 @@ create table product_supplier(
     quantity_received INTEGER,
     quantity_remaining INTEGER,
     status varchar(20),
+    batch int,
     created_by INTEGER,
     created_at DateTime,
     updated_at DateTime,
     
     
-    PRIMARY key(id),
-    FOREIGN KEY(supplier) REFERENCES supplier(id),
-    FOREIGN KEY(product) REFERENCES products(id),
-    FOREIGN KEY(created_by) REFERENCES products(id)
+     PRIMARY key(id)
+--     FOREIGN KEY(supplier) REFERENCES supplier(id),
+--     FOREIGN KEY(product) REFERENCES products(id),
+--     FOREIGN KEY(created_by) REFERENCES products(id)
     
     )
 ;
+create table product_suppliers(
+    id INTEGER primary key auto_increment,
+    supplier INTEGER,
+    product INTEGER,
+    created_at DateTime,
+    updated_at DateTime
+    
+    )
+;
+
+
