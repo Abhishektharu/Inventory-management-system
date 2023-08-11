@@ -116,55 +116,6 @@ $response_message = '';
 </body>
 <script src="js/script.js"></script>
 <script src="js/jquery/jquery-3.7.0.min.js"></script>
-<script>
-    function script() {
-        this.initilize = function() {
-                this.registerEvents();
-            },
 
-            this.registerEvents = function() {
-                document.addEventListener('click', function(e) {
-                    targetElement = e.target;
-                    classList = targetElement.classList;
-
-                    if (classList.contains('deleteUser')) {
-                        e.preventDefault();
-                        userId = targetElement.dataset.userid;
-                        fname = targetElement.dataset.fname;
-                        lname = targetElement.dataset.lname;
-                        fullName = fname + ' ' + lname;
-
-                        if (window.confirm('Are you sure to delete ? ' + fullName)) {
-                            $.ajax({
-                                method: 'POST',
-                                data: {
-                                    user_id: userId,
-                                    f_name: fname,
-                                    l_name: lname
-                                },
-                                url: 'database/delete_user.php',
-                                dataType: 'json',
-                                success: function(data){
-                                    //from delete_user success = true;
-                                    if(data.success){
-                                        if(window.confirm(data.message)){
-                                            location.reload();
-                                        }
-                                    }
-                                    else window.alert(data.message);
-                                }
-                            })
-                        } else {
-                            console.log("not delete");
-                        }
-                    }
-                });
-            }
-
-    }
-
-    var script = new script;
-    script.initilize();
-</script>
 
 </html>

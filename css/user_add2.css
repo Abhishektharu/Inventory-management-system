@@ -151,10 +151,11 @@ i.mainMenuIconArrow{
 .po-badge-pending{
     background: #fd97a8;
     border: 1px solid #eae3e3;
+    padding: 0px 20px;
 }
 
 .po-badge-complete{
-    background-color: #6ad26a;
+    background-color: #48b748;
     border: 1px solid #eae3e3;
-
+    padding: 0px 16px;
 }
