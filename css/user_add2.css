@@ -149,13 +149,24 @@ i.mainMenuIconArrow{
 }
 
 .po-badge-pending{
-    background: #fd97a8;
+    background: #eb0d32;
     border: 1px solid #eae3e3;
     padding: 0px 20px;
+    color: white;
+
 }
 
 .po-badge-complete{
-    background-color: #48b748;
+    background-color: #0f9e0f;
     border: 1px solid #eae3e3;
     padding: 0px 16px;
+    color: white;
+
+}
+
+.po-badge-incomplete{
+    background-color: #0c1467;
+    border: 1px solid #eae3e3;
+    padding: 0px 10px;
+    color: white;
 }

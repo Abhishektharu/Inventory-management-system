@@ -65,7 +65,7 @@ $response_message = '';
                                                 <div class="modal-dialog modal-lg">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                                            <h1 class="modal-title fs-5 batchId" id="exampleModalLabel">Update product-orders:</h1>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body ">
@@ -75,10 +75,10 @@ $response_message = '';
                                                         </div>
 
 
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-primary updateOrder">Update</button>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary close" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-primary " id="updateOrder">Update</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -213,6 +213,7 @@ $response_message = '';
                 if (classList.contains('updatePoBtn')) {
                     e.preventDefault();
 
+                    batchNumber = targetElement.dataset.id;
                     batchNumberContainer = 'container-' + targetElement.dataset.id;
 
                     productList = document.querySelectorAll('#' + batchNumberContainer + ' .po_product');
@@ -220,6 +221,8 @@ $response_message = '';
                     qtyReceivedList = document.querySelectorAll('#' + batchNumberContainer + ' .po_qty_received');
                     supplierList = document.querySelectorAll('#' + batchNumberContainer + ' .po_qty_supplier');
                     statusList = document.querySelectorAll('#' + batchNumberContainer + ' .po_qty_status');
+                    rowIds = document.querySelectorAll('#' + batchNumberContainer + ' .po_qty_row_id');
+                    // console.log(rowIds);
 
                     poListsArr = [];
 
@@ -229,7 +232,8 @@ $response_message = '';
                             qtyOrdered: qtyOrderedList[i].innerText,
                             qtyReceived: qtyReceivedList[i].innerText,
                             supplier: supplierList[i].innerText,
-                            status: statusList[i].innerText
+                            status: statusList[i].innerText,
+                            id: rowIds[i].value
                         });
                     }
 
@@ -239,7 +243,7 @@ $response_message = '';
 
                     //store in html
                     var poListHtml = '\
-                    <table>\
+                    <table id="formTable' + batchNumber + '">\
                             <thead>\
                                 <tr>\
                                     <th scope="col">Product Name</th>\
@@ -255,15 +259,16 @@ $response_message = '';
                         poListHtml += '\
                                 <tr>\
                                         <td class="po_product">' + poList.name + '</td>\
-                                        <td class="po_qty_ordered">' + poList.qtyOrdered + '</td>\
-                                        <td class="po_qty_received">' + poList.qtyReceived + '</td>\
+                                        <td class="po_qty_ordered" id="qtyOrdered" >' + poList.qtyOrdered + '</td>\
+                                        <td class="po_qty_received" ><input type="number" id="qtyRecieved"value="' + poList.qtyReceived + '"/></td>\
                                         <td class="po_qty_supplier">' + poList.supplier + '</td>\
                                         <td>\
-                                            <select>\
+                                            <select class="po_qty_status" id="status">\
                                                 <option value="pending" ' + (poList.status == 'pending' ? 'selected' : '') + '>pending</option>\
                                                 <option value="complete" ' + (poList.status == 'complete' ? 'selected' : '') + '>complete</option>\
+                                                <option value="incomplete" ' + (poList.status == 'incomplete' ? 'selected' : '') + '>incomplete</option>\
                                             </select>\
-                                            <input type="hidden" class="po_qty_row_id" value="<?= $batch_po['id'] ?>">\
+                                            <input type="hidden" id="rowId"class="po_qty_row_id" value="' + poList.id + '">\
                                         </td>\
                                 </tr>\
                             ';
@@ -272,16 +277,72 @@ $response_message = '';
 
                     poListHtml += '</tbody></table>';
                     // console.log(poListHtml);
+                    
+                    $('.table_data').append(poListHtml);
+
+
+                    $(document).ready(function() {
+                        $("#updateOrder").click(function() {
+                            // alert('hi');
+                            formtablecontainer = 'formTable: ' + batchNumber;
+
+                            qtyReceivedList = document.querySelectorAll('#' + batchNumberContainer + ' .po_qty_received');
+                            // console.log(qtyReceivedList);
+                            statusList = document.querySelectorAll('#' + batchNumberContainer + ' .po_qty_status');
+                            // rowIds = document.querySelectorAll('#' + batchNumberContainer + ' .po_qty_row_id');
 
 
 
 
+                            // poListsArrForm = [];
+
+                            // for (var i = 0; i < productList.length; i++) {
+                            //     poListsArrForm.push({
+                            //         qtyReceived: qtyReceivedList[i].innerText,
+                            //         status: statusList[i].innerText,
+                            //         id: rowIds[i].value
+                            //     });
+                            // }
+                            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                            // console.log(poListsArrForm);
+                            var quantityReceived = $('#qtyRecieved').val();
+                            // console.log(quantityReceived);
+
+                            var rowIds = $('#rowId').val()
+                            // console.log(rowIds);
+
+                            var status = $('#status').val();
+                            // console.log(status);
+                            var quantityOrdered = $('#qtyOrdered').val();
+                            console.log(quantityOrdered);
+
+                            $.ajax({
+                                type: "post",
+                                url: "database/update_order.php",
+                                data: {
+                                    'isUpdate': true,
+                                    'rowIds': rowIds,
+                                    'quantityReceived': quantityReceived,
+                                    'status': status
+                                },
+                                success: function(response) {
+                                    console.log(response);
+                                    $('#exampleModal').modal('hide');
+                                    if(response.success){
+                                        location.reload();
+                                    }
+                                }
+                            });
+
+                            // $('.table_data').append(poListHtml);
+                        })
+                    })
                 }
 
-                $('.table_data').append(poListHtml);
 
             });
         }
+
 
 
 
@@ -292,7 +353,9 @@ $response_message = '';
     var script = new script;
     script.initialize();
 </script>
+<script>
 
+</script>
 
 
 </html>
