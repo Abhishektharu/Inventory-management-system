@@ -259,7 +259,7 @@ $response_message = '';
                         poListHtml += '\
                                 <tr>\
                                         <td class="po_product">' + poList.name + '</td>\
-                                        <td class="po_qty_ordered" id="qtyOrdered" >' + poList.qtyOrdered + '</td>\
+                                        <td class="po_qyt_ordered" ><input type="number" id="qtyOrdered" value="' + poList.qtyOrdered + '" /></td>\
                                         <td class="po_qty_received" ><input type="number" id="qtyRecieved"value="' + poList.qtyReceived + '"/></td>\
                                         <td class="po_qty_supplier">' + poList.supplier + '</td>\
                                         <td>\
@@ -314,7 +314,7 @@ $response_message = '';
                             var status = $('#status').val();
                             // console.log(status);
                             var quantityOrdered = $('#qtyOrdered').val();
-                            console.log(quantityOrdered);
+                            // console.log(quantityOrdered);
 
                             $.ajax({
                                 type: "post",
@@ -323,14 +323,13 @@ $response_message = '';
                                     'isUpdate': true,
                                     'rowIds': rowIds,
                                     'quantityReceived': quantityReceived,
+                                    'quantityOrdered': quantityOrdered,
                                     'status': status
                                 },
                                 success: function(response) {
-                                    console.log(response);
+                                    // console.log(response);
                                     $('#exampleModal').modal('hide');
-                                    if(response.success){
-                                        location.reload();
-                                    }
+                                    location.reload();
                                 }
                             });
 

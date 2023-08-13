@@ -28,18 +28,19 @@
     
     $id = (int) $_POST['rowIds'];
     $quantityReceived =(int) $_POST['quantityReceived'];
-    // $quantityReceived = (int) $_POST['']
+    $quantityOrdered= (int) $_POST['quantityOrdered'];
     $status = $_POST['status'];
 
 
-    // $qty_remaining = $qty_ordered - $quantityReceived;
+    $quantityRemaining = $quantityOrdered - $quantityReceived;
 
-    $query = "UPDATE order_product set quantity_received ='$quantityReceived', status='$status' where id='$id'";
+    $query = "UPDATE order_product set quantity_ordered = '$quantityOrdered', quantity_received ='$quantityReceived', quantity_remaining = '$quantityRemaining', status='$status' where id='$id'";
     $query_run = mysqli_query($conn, $query);
 
     if($query_run)
     {
         echo $return  = "Successfully Stored";
+        $return = true;
     }
     else
     {
