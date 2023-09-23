@@ -30,6 +30,7 @@
     $quantityReceived =(int) $_POST['quantityReceived'];
     $quantityOrdered= (int) $_POST['quantityOrdered'];
     $status = $_POST['status'];
+    
 
 
     $quantityRemaining = $quantityOrdered - $quantityReceived;
@@ -46,4 +47,5 @@
     {
         echo $return  = "Something Went Wrong.!";
     }
+
 }

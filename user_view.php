@@ -253,6 +253,7 @@ $response_message = '';
                                     },
                                     success: function(response) {
                                         $('#editmodal').modal('hide');
+                                        location.reload();
                                         // console.log(response);
                                     }
                                 });

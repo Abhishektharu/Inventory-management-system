@@ -185,13 +185,13 @@ $response_message = '';
         </div>
 
         <?php unset($_SESSION['response']); ?>
-    </div>
-    </div>
 
-    <!-- side bar or nav bar out of section and inside of wrapper -->
-    <?php
-    include('partials/app_sidebar.php');
-    ?>
+
+    
+        <!-- side bar or nav bar out of section and inside of wrapper -->
+        <?php
+        include('partials/app_sidebar.php');
+        ?>
     </div>
 </body>
 <script src="js/script.js"></script>
@@ -277,7 +277,7 @@ $response_message = '';
 
                     poListHtml += '</tbody></table>';
                     // console.log(poListHtml);
-                    
+
                     $('.table_data').append(poListHtml);
 
 
@@ -289,22 +289,22 @@ $response_message = '';
                             qtyReceivedList = document.querySelectorAll('#' + batchNumberContainer + ' .po_qty_received');
                             // console.log(qtyReceivedList);
                             statusList = document.querySelectorAll('#' + batchNumberContainer + ' .po_qty_status');
-                            // rowIds = document.querySelectorAll('#' + batchNumberContainer + ' .po_qty_row_id');
+                            rowIds = document.querySelectorAll('#' + batchNumberContainer + ' .po_qty_row_id');
 
 
 
 
-                            // poListsArrForm = [];
+                            poListsArrForm = [];
 
-                            // for (var i = 0; i < productList.length; i++) {
-                            //     poListsArrForm.push({
-                            //         qtyReceived: qtyReceivedList[i].innerText,
-                            //         status: statusList[i].innerText,
-                            //         id: rowIds[i].value
-                            //     });
-                            // }
+                            for (var i = 0; i < productList.length; i++) {
+                                poListsArrForm.push({
+                                    qtyReceived: qtyReceivedList[i].innerText,
+                                    status: statusList[i].innerText,
+                                    id: rowIds[i].value
+                                });
+                            }
                             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                            // console.log(poListsArrForm);
+                            console.log(poListsArrForm);
                             var quantityReceived = $('#qtyRecieved').val();
                             // console.log(quantityReceived);
 
