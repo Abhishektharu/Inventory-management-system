@@ -2,6 +2,7 @@ var hamburger = document.querySelector(".hamburger");
 hamburger.addEventListener("click", function() {
     document.querySelector("body").classList.toggle("active");
 })
+            $stmt = $pdo->prepare("UPDATE order_product SET quantity_received = :qtyReceived, status = :status, quantity_ordered = :qtyOrdered WHERE id = :id");
 
 
 // submenu show /hide function

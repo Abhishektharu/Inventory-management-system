@@ -70,7 +70,6 @@ $response_message = '';
                                                         </div>
                                                         <div class="modal-body ">
                                                             <table class="table table-bordered table_data">
-
                                                             </table>
                                                         </div>
 
@@ -187,7 +186,7 @@ $response_message = '';
         <?php unset($_SESSION['response']); ?>
 
 
-    
+
         <!-- side bar or nav bar out of section and inside of wrapper -->
         <?php
         include('partials/app_sidebar.php');
@@ -259,7 +258,7 @@ $response_message = '';
                         poListHtml += '\
                                 <tr>\
                                         <td class="po_product">' + poList.name + '</td>\
-                                        <td class="po_qyt_ordered" ><input type="number" id="qtyOrdered" value="' + poList.qtyOrdered + '" /></td>\
+                                        <td class="po_qty_ordered" ><input type="number" id="qtyOrdered" value="' + poList.qtyOrdered + '" /></td>\
                                         <td class="po_qty_received" ><input type="number" id="qtyRecieved"value="' + poList.qtyReceived + '"/></td>\
                                         <td class="po_qty_supplier">' + poList.supplier + '</td>\
                                         <td>\
@@ -272,7 +271,7 @@ $response_message = '';
                                         </td>\
                                 </tr>\
                             ';
-                        // console.log(poList);
+                        // console.log(poListsArr);
                     });
 
                     poListHtml += '</tbody></table>';
@@ -286,54 +285,63 @@ $response_message = '';
                             // alert('hi');
                             formtablecontainer = 'formTable: ' + batchNumber;
 
-                            qtyReceivedList = document.querySelectorAll('#' + batchNumberContainer + ' .po_qty_received');
-                            // console.log(qtyReceivedList);
+                            qtyOrdered = document.querySelector('#' + batchNumberContainer + ' .po_qty_received')
+
+                            console.log(qtyOrdered);
                             statusList = document.querySelectorAll('#' + batchNumberContainer + ' .po_qty_status');
                             rowIds = document.querySelectorAll('#' + batchNumberContainer + ' .po_qty_row_id');
-
-
-
+                            qtyOrdered = document.querySelector('#' + batchNumberContainer + ' .po_qty_ordered')
 
                             poListsArrForm = [];
 
-                            for (var i = 0; i < productList.length; i++) {
-                                poListsArrForm.push({
-                                    qtyReceived: qtyReceivedList[i].innerText,
-                                    status: statusList[i].innerText,
-                                    id: rowIds[i].value
-                                });
-                            }
-                            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                            console.log(poListsArrForm);
-                            var quantityReceived = $('#qtyRecieved').val();
-                            // console.log(quantityReceived);
+                            // for (var i = 0; i < productList.length; i++) {
+                            //     poListsArrForm.push({
+                            //         qtyReceived: qtyReceivedList[i].innerText,
+                            //         status: statusList[i].innerText,
+                            //         id: rowIds[i].value,
 
-                            var rowIds = $('#rowId').val()
-                            // console.log(rowIds);
+                            //         qtyOrdered: qtyOrderedList[i].innerText,
+                            //     });
+                            // }
 
-                            var status = $('#status').val();
-                            // console.log(status);
-                            var quantityOrdered = $('#qtyOrdered').val();
-                            // console.log(quantityOrdered);
+                            /////////////////////////////////////////////////////////////////////////////////////////////
+                            // Iterate through table rows and collect data
+                            var productList = [];
+                            $("#formTable" + batchNumber + " tbody tr").each(function() {
+                                var productName = $(this).find(".po_product").text();
+                                var qtyOrdered = $(this).find("#qtyOrdered").val();
+                                var qtyReceived = $(this).find("#qtyRecieved").val();
+                                var supplier = $(this).find(".po_qty_supplier").text();
+                                var status = $(this).find("#status").val();
+                                var rowId = $(this).find(".po_qty_row_id").val();
+
+                                var productData = {
+                                    name: productName,
+                                    qtyOrdered: qtyOrdered,
+                                    qtyReceived: qtyReceived,
+                                    supplier: supplier,
+                                    status: status,
+                                    id: rowId
+                                };
+
+                                productList.push(productData);
+                            });
+                            // console.log(productList);
+
+                            var jsonData = JSON.stringify(poListsArrForm);
 
                             $.ajax({
                                 type: "post",
                                 url: "database/update_order.php",
                                 data: {
-                                    'isUpdate': true,
-                                    'rowIds': rowIds,
-                                    'quantityReceived': quantityReceived,
-                                    'quantityOrdered': quantityOrdered,
-                                    'status': status
+                                    productList: JSON.stringify(productList)
                                 },
                                 success: function(response) {
-                                    // console.log(response);
+                                    console.log(response);
                                     $('#exampleModal').modal('hide');
                                     location.reload();
                                 }
                             });
-
-                            // $('.table_data').append(poListHtml);
                         })
                     })
                 }
