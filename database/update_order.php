@@ -66,15 +66,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Loop through the product list and update the database
         foreach ($productList as $productData) {
             $productId = $productData['id'];
-            $qtyOrdered = $productData['qtyOrdered'];
+            // $qtyOrdered = $productData['qtyOrdered'];
             $qtyReceived = $productData['qtyReceived'];
             $status = $productData['status'];
 
+            $quantityRemaining = $quantityOrdered - $quantityReceived;
+
             // Prepare and execute an SQL query to update the product
             // $stmt = $pdo->prepare("UPDATE your_product_table SET qty_ordered = :qtyOrdered, qty_received = :qtyReceived, status = :status WHERE id = :id");
-            $stmt = $pdo->prepare("UPDATE order_product SET quantity_received = :qtyReceived, status = :status, quantity_ordered = :qtyOrdered WHERE id = :id");
+            $stmt = $pdo->prepare("UPDATE order_product SET quantity_received = :qtyReceived, status = :status WHERE id = :id");
 
-            $stmt->bindParam(':qtyOrdered', $qtyOrdered, PDO::PARAM_INT);
+            // $stmt->bindParam(':qtyOrdered', $qtyOrdered, PDO::PARAM_INT);
             $stmt->bindParam(':qtyReceived', $qtyReceived, PDO::PARAM_INT);
             $stmt->bindParam(':status', $status, PDO::PARAM_STR);
             $stmt->bindParam(':id', $productId, PDO::PARAM_INT);

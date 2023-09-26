@@ -170,3 +170,14 @@ i.mainMenuIconArrow{
     padding: 0px 10px;
     color: white;
 }
+
+
+div.dashColumn{
+    width: 50%;
+}
+
+div.charts{
+    display: flex;
+    flex-direction: row;
+    /* border: solid red 2px; */
+}

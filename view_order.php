@@ -245,9 +245,10 @@ $response_message = '';
                     <table id="formTable' + batchNumber + '">\
                             <thead>\
                                 <tr>\
-                                    <th scope="col">Product Name</th>\
-                                    <th scope="col">Qty Ordered</th>\
-                                    <th scope="col">Qty Received</th>\
+                                    <th scope="col">Name </th>\
+                                    <th scope="col"> Qty Ordered </th>\
+                                    <th scope="col"> Qty Received </th>\
+                                    <th scope="col"> Qty Delivered </th>\
                                     <th scope="col">Supplier</th>\
                                     <th scope="col">Status</th>\
                                 </tr>\
@@ -258,7 +259,8 @@ $response_message = '';
                         poListHtml += '\
                                 <tr>\
                                         <td class="po_product">' + poList.name + '</td>\
-                                        <td class="po_qty_ordered" ><input type="number" id="qtyOrdered" value="' + poList.qtyOrdered + '" /></td>\
+                                        <td class="po_qty_ordered" >' + poList.qtyOrdered + ' </td>\
+                                        <td class="po_qty_received" >' + poList.qtyReceived + ' </td>\
                                         <td class="po_qty_received" ><input type="number" id="qtyRecieved"value="' + poList.qtyReceived + '"/></td>\
                                         <td class="po_qty_supplier">' + poList.supplier + '</td>\
                                         <td>\
@@ -309,7 +311,7 @@ $response_message = '';
                             var productList = [];
                             $("#formTable" + batchNumber + " tbody tr").each(function() {
                                 var productName = $(this).find(".po_product").text();
-                                var qtyOrdered = $(this).find("#qtyOrdered").val();
+                                // var qtyOrdered = $(this).find("#qtyOrdered").val();
                                 var qtyReceived = $(this).find("#qtyRecieved").val();
                                 var supplier = $(this).find(".po_qty_supplier").text();
                                 var status = $(this).find("#status").val();
@@ -317,7 +319,6 @@ $response_message = '';
 
                                 var productData = {
                                     name: productName,
-                                    qtyOrdered: qtyOrdered,
                                     qtyReceived: qtyReceived,
                                     supplier: supplier,
                                     status: status,
@@ -337,7 +338,7 @@ $response_message = '';
                                     productList: JSON.stringify(productList)
                                 },
                                 success: function(response) {
-                                    console.log(response);
+                                    // console.log(response);
                                     $('#exampleModal').modal('hide');
                                     location.reload();
                                 }
