@@ -1,56 +1,5 @@
 <?php
-    // $purchase_orders = $_POST['payload'];
-    // $conn = mysqli_connect("localhost","root","","inventory");
-        // echo $return = $rowIds;
-        // echo $return = $quantityReceived;
-        // echo $return = $status;
-
-    // foreach($purchase_orders as $po){
-    //     $received = (int) $po['qtyRecieved'];
-    //     $status = $po['status'];
-    //     $row_id = $po['id'];
-    //     $qty_ordered = (int) $po['qtyOrdered'];
-
-    //     $qty_remaining = $qty_ordered - $received;
-
-    //     $sql = "UPDATE order_product set quantity_received=?, status=? where id=?";
-
-    //     $stmt = $conn-> prepare($sql);
-
-    //     $stmt->execute([$received, $status, $row_id]);
-    // }
-
-    // $quantityReceived = $_POST['quantityReceived'];
-    // echo $return = $quantityReceived;
-
-//     if(isset($_POST['isUpdate']))
-// {
-    
-//     $id = (int) $_POST['rowIds'];
-//     $quantityReceived =(int) $_POST['quantityReceived'];
-//     $quantityOrdered= (int) $_POST['quantityOrdered'];
-//     $status = $_POST['status'];
-    
-
-
-//     $quantityRemaining = $quantityOrdered - $quantityReceived;
-
-//     $query = "UPDATE order_product set quantity_ordered = '$quantityOrdered', quantity_received ='$quantityReceived', quantity_remaining = '$quantityRemaining', status='$status' where id='$id'";
-//     $query_run = mysqli_query($conn, $query);
-
-//     if($query_run)
-//     {
-//         echo $return  = "Successfully Stored";
-//         $return = true;
-//     }
-//     else
-//     {
-//         echo $return  = "Something Went Wrong.!";
-//     }
-
-   
-// }
-
+include('connection.php');
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         // Create a PDO database connection
@@ -63,24 +12,56 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Decode the JSON data into a PHP array
         $productList = json_decode($productListJSON, true);
 
+        
+
         // Loop through the product list and update the database
         foreach ($productList as $productData) {
-            $productId = $productData['id'];
-            // $qtyOrdered = $productData['qtyOrdered'];
-            $qtyReceived = $productData['qtyReceived'];
-            $status = $productData['status'];
+            $delivered = (int) $productData['qtyDelivered'];
+            
+            if($delivered > 0){
+                $curr_qty_received = (int) $productData['qtyReceived'];
+                $productId = $productData['id'];
+                $qtyOrdered = (int) $productData['qtyOrdered'];
+                $qtyReceived = (int) $productData['qtyReceived'];
+                $status = $productData['status'];
 
-            $quantityRemaining = $quantityOrdered - $quantityReceived;
 
-            // Prepare and execute an SQL query to update the product
-            // $stmt = $pdo->prepare("UPDATE your_product_table SET qty_ordered = :qtyOrdered, qty_received = :qtyReceived, status = :status WHERE id = :id");
-            $stmt = $pdo->prepare("UPDATE order_product SET quantity_received = :qtyReceived, status = :status WHERE id = :id");
+                
+                
+                $updated_qty_received = $curr_qty_received + $delivered;
+                $qty_remaining = $qtyOrdered - $updated_qty_received;
+    
+                // Prepare and execute an SQL query to update the product
+                // $stmt = $pdo->prepare("UPDATE your_product_table SET qty_ordered = :qtyOrdered, qty_received = :qtyReceived, status = :status WHERE id = :id");
+                $stmt = $pdo->prepare("UPDATE order_product SET quantity_received = :updated_qty_received, quantity_remaining = :qty_remaining, status = :status WHERE id = :id");
+    
+                // $stmt->bindParam(':qtyOrdered', $qtyOrdered, PDO::PARAM_INT);
+                $stmt->bindParam(':updated_qty_received', $updated_qty_received, PDO::PARAM_INT);
+                $stmt->bindParam(':qty_remaining', $qty_remaining, PDO::PARAM_INT);
+                $stmt->bindParam(':status', $status, PDO::PARAM_STR);
+                $stmt->bindParam(':id', $productId, PDO::PARAM_INT);
+                $stmt->execute();
 
-            // $stmt->bindParam(':qtyOrdered', $qtyOrdered, PDO::PARAM_INT);
-            $stmt->bindParam(':qtyReceived', $qtyReceived, PDO::PARAM_INT);
-            $stmt->bindParam(':status', $status, PDO::PARAM_STR);
-            $stmt->bindParam(':id', $productId, PDO::PARAM_INT);
-            $stmt->execute();
+
+                //history
+                $delivery_history = [
+                    'order_product_id' => $productId,
+                    'qty_received' => $delivered,
+                    'date_received' => date('Y-m-d H:i:s'),
+                    'date_updated' => date('Y-m-d H:i:s')
+                ];
+
+                $sql = "INSERT INTO order_product_history(order_product_id, qty_received, date_received, date_updated)
+                VALUES (:order_product_id,:qty_received, :date_received, :date_updated)";
+                       
+                $stmt = $conn->prepare($sql);
+                $stmt->execute($delivery_history);
+                
+
+                
+            }
+
+            
         }
 
         echo "Product data updated successfully.";

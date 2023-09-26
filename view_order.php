@@ -259,9 +259,9 @@ $response_message = '';
                         poListHtml += '\
                                 <tr>\
                                         <td class="po_product">' + poList.name + '</td>\
-                                        <td class="po_qty_ordered" >' + poList.qtyOrdered + ' </td>\
-                                        <td class="po_qty_received" >' + poList.qtyReceived + ' </td>\
-                                        <td class="po_qty_received" ><input type="number" id="qtyRecieved"value="' + poList.qtyReceived + '"/></td>\
+                                        <td class="po_qty_ordered" id="qtyOrdered">' + poList.qtyOrdered + ' </td>\
+                                        <td class="po_qty_received" id="qtyRecieved">' + poList.qtyReceived + ' </td>\
+                                        <td class="po_qty_received" ><input type="number" id="qtyDelivered"value="0"/></td>\
                                         <td class="po_qty_supplier">' + poList.supplier + '</td>\
                                         <td>\
                                             <select class="po_qty_status" id="status">\
@@ -289,40 +289,31 @@ $response_message = '';
 
                             qtyOrdered = document.querySelector('#' + batchNumberContainer + ' .po_qty_received')
 
-                            console.log(qtyOrdered);
+                            // console.log(qtyOrdered);
                             statusList = document.querySelectorAll('#' + batchNumberContainer + ' .po_qty_status');
                             rowIds = document.querySelectorAll('#' + batchNumberContainer + ' .po_qty_row_id');
                             qtyOrdered = document.querySelector('#' + batchNumberContainer + ' .po_qty_ordered')
 
                             poListsArrForm = [];
-
-                            // for (var i = 0; i < productList.length; i++) {
-                            //     poListsArrForm.push({
-                            //         qtyReceived: qtyReceivedList[i].innerText,
-                            //         status: statusList[i].innerText,
-                            //         id: rowIds[i].value,
-
-                            //         qtyOrdered: qtyOrderedList[i].innerText,
-                            //     });
-                            // }
-
-                            /////////////////////////////////////////////////////////////////////////////////////////////
                             // Iterate through table rows and collect data
                             var productList = [];
                             $("#formTable" + batchNumber + " tbody tr").each(function() {
                                 var productName = $(this).find(".po_product").text();
-                                // var qtyOrdered = $(this).find("#qtyOrdered").val();
-                                var qtyReceived = $(this).find("#qtyRecieved").val();
+                                var qtyOrdered = $(this).find("#qtyOrdered").text();
+                                var qtyReceived = $(this).find("#qtyRecieved").text();
                                 var supplier = $(this).find(".po_qty_supplier").text();
                                 var status = $(this).find("#status").val();
                                 var rowId = $(this).find(".po_qty_row_id").val();
+                                var qtyDelivered = $(this).find("#qtyDelivered").val();
 
                                 var productData = {
                                     name: productName,
                                     qtyReceived: qtyReceived,
+                                    qtyOrdered: qtyOrdered,
                                     supplier: supplier,
                                     status: status,
-                                    id: rowId
+                                    id: rowId,
+                                    qtyDelivered: qtyDelivered
                                 };
 
                                 productList.push(productData);
@@ -338,7 +329,7 @@ $response_message = '';
                                     productList: JSON.stringify(productList)
                                 },
                                 success: function(response) {
-                                    // console.log(response);
+                                    console.log(response);
                                     $('#exampleModal').modal('hide');
                                     location.reload();
                                 }
