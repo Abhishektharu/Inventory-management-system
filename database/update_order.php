@@ -24,6 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $qtyOrdered = (int) $productData['qtyOrdered'];
                 $qtyReceived = (int) $productData['qtyReceived'];
                 $status = $productData['status'];
+                $product_id = (int) $productData['pid'];
 
 
                 
@@ -58,6 +59,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt->execute($delivery_history);
                 
 
+                $stmt = $conn->prepare("
+                       SELECT products.stock from products
+                       WHERE id = $product_id");
+               $stmt->execute();
+               $product = $stmt->fetch();
+
+               $curr_stock = (int) $product['stock'];
+
+               //update to add the delivered product to current quantity
+                $updated_stock = $curr_stock + $delivered;
+                $sql = "update products set stock = ? where id = ?";
+
+                $stmt = $conn->prepare($sql);
+                $stmt-> execute([$updated_stock , $product_id]);
+
                 
             }
 
@@ -73,4 +89,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
     echo "Invalid request.";
 }
-?>

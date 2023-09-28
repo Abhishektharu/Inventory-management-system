@@ -62,7 +62,7 @@ $response_message = '';
 
                                             <!-- Modal -->
                                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg">
+                                                <div class="modal-dialog modal-xl">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h1 class="modal-title fs-5 batchId" id="exampleModalLabel">Update product-orders:</h1>
@@ -84,15 +84,35 @@ $response_message = '';
                                         </div>
 
                                         <!-- ########################################################################################################################################################## -->
+                                        <div class="modal fade" id="history_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-xl">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">History of orders</h1>
+                                                        <button type="bgiutton" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="table table-bordered history_modal ">
+                                                        No records were found...
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <!-- ########################################################################################################################################### -->
                                         <div class="poListContainers">
                                             <?php
                                             $stmt = $conn->prepare("
-                                                    SELECT order_product.id , products.product_name, order_product.quantity_ordered, users.first_name, users.last_name,
+                                                    SELECT order_product.id , order_product.product, products.product_name, order_product.quantity_ordered, order_product.quantity_remaining, users.first_name, users.last_name,
                                                     order_product.batch, order_product.quantity_received, users.last_name, suppliers.supplier_name, order_product.status, order_product.created_at
                                                      FROM
                                                                 order_product, suppliers, products, users
                                                     WHERE
-                                                        order_product.supplier = supplierS.id
+                                                        order_product.supplier = suppliers.id
                                                             AND
                                                         order_product.product = products.id
                                                             and
@@ -123,10 +143,12 @@ $response_message = '';
                                                                 <th>Product</th>
                                                                 <th>Qty Ordered</th>
                                                                 <th>Qty Received</th>
+                                                                <th>Qty Rem</th>
                                                                 <th>Supplier</th>
                                                                 <th>Status</th>
                                                                 <th>Ordered By</th>
                                                                 <th>Created Date</th>
+                                                                <th>Delivery History</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -138,6 +160,7 @@ $response_message = '';
                                                                     <td class="po_product"><?= $batch_po['product_name']  ?></td>
                                                                     <td class="po_qty_ordered"><?= $batch_po['quantity_ordered'] ?></td>
                                                                     <td class="po_qty_received"><?= $batch_po['quantity_received'] ?></td>
+                                                                    <td class="po_qty_remaining"><?= $batch_po['quantity_remaining'] ?></td>
                                                                     <td class="po_qty_supplier"><?= $batch_po['supplier_name'] ?></td>
                                                                     <td class="po_qty_status ">
                                                                         <span class="po-badge po-badge-<?= $batch_po['status'] ?>">
@@ -148,6 +171,10 @@ $response_message = '';
                                                                     <td>
                                                                         <?= $batch_po['created_at'] ?>
                                                                         <input type="hidden" class="po_qty_row_id" value="<?= $batch_po['id'] ?>">
+                                                                        <input type="hidden" class="po_qty_product_id" value="<?= $batch_po['product'] ?>">
+                                                                    </td>
+                                                                    <td>
+                                                                        <button class="appbtn deliveryBtn" data-bs-toggle="modal" data-bs-target="#history_modal" data-id="<?= $batch_po['id'] ?>">Delivery History</button>
                                                                     </td>
                                                                 </tr>
                                                             <?php } ?>
@@ -293,11 +320,17 @@ $response_message = '';
                             statusList = document.querySelectorAll('#' + batchNumberContainer + ' .po_qty_status');
                             rowIds = document.querySelectorAll('#' + batchNumberContainer + ' .po_qty_row_id');
                             qtyOrdered = document.querySelector('#' + batchNumberContainer + ' .po_qty_ordered')
+                            pIds = document.querySelector('#' + batchNumberContainer + ' .po_qty_product_id')
+                            console.log(pIds);
 
                             poListsArrForm = [];
                             // Iterate through table rows and collect data
                             var productList = [];
-                            $("#formTable" + batchNumber + " tbody tr").each(function() {
+
+                            // Assuming you have already selected the elements with class .po_qty_product_id into pIds
+                            var pIds = document.querySelectorAll('#' + batchNumberContainer + ' .po_qty_product_id');
+
+                            $("#formTable" + batchNumber + " tbody tr").each(function(index) {
                                 var productName = $(this).find(".po_product").text();
                                 var qtyOrdered = $(this).find("#qtyOrdered").text();
                                 var qtyReceived = $(this).find("#qtyRecieved").text();
@@ -306,6 +339,8 @@ $response_message = '';
                                 var rowId = $(this).find(".po_qty_row_id").val();
                                 var qtyDelivered = $(this).find("#qtyDelivered").val();
 
+                                var pidValue = pIds[index].value; // Get the value from pIds at the same index
+
                                 var productData = {
                                     name: productName,
                                     qtyReceived: qtyReceived,
@@ -313,12 +348,17 @@ $response_message = '';
                                     supplier: supplier,
                                     status: status,
                                     id: rowId,
-                                    qtyDelivered: qtyDelivered
+                                    qtyDelivered: qtyDelivered,
+                                    pid: pidValue // Add pid from pIds at the same index
                                 };
 
                                 productList.push(productData);
                             });
-                            // console.log(productList);
+
+                            // Now productList contains both productData and pid values for each row
+
+
+                            console.log(productList);
 
                             var jsonData = JSON.stringify(poListsArrForm);
 
@@ -329,8 +369,9 @@ $response_message = '';
                                     productList: JSON.stringify(productList)
                                 },
                                 success: function(response) {
-                                    console.log(response);
+                                    // console.log(response);
                                     $('#exampleModal').modal('hide');
+                                    // alert(response);
                                     location.reload();
                                 }
                             });
@@ -338,7 +379,46 @@ $response_message = '';
                     })
                 }
 
+                if (classList.contains('deliveryBtn')) {
+                    let id = targetElement.dataset.id;
 
+                    // console.log(id);
+
+                    $.get('database/delivery_history.php', {
+                        id: id
+                    }, function(data) {
+                        if (data.length > 0) {
+                            const $historyModal = $('.history_modal');
+
+                            // Clear the existing content of the modal
+                            $historyModal.empty();
+                            rows = '';
+                            data.forEach((row, id) => {
+                                receivedDate = new Date(row['date_received']);
+                                rows += '\
+                                    <tr>\
+                                        <td>' + (id + 1) + '</td>\
+                                        <td>' + receivedDate.toUTCString() + '</td>\
+                                        <td>' + row['qty_received'] + '</td>\
+                                '
+                            });
+                            history_modal_body = '<table class="history_modal_body">\
+                            <thead>\
+                                <tr>\
+                                    <th>#</th>\
+                                    <th>date received</th>\
+                                    <th>qty received</th>\
+                                </tr>\
+                            </thead>\
+                                <tbody>' + rows + '</tbody>\
+                            '
+                            $historyModal.append(history_modal_body);
+                            // console.log(data);
+                        } else {
+                            // alert('No delivery records found');
+                        }
+                    }, 'json');
+                }
             });
         }
 

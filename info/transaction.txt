@@ -10,3 +10,7 @@ when saving, make sure the quantity is set to 0
 create records table 
     -connects row id to new table; // don't need batch number order_product id can fetch it; 
     -id,order_product_id, qty receive, date receive
+
+
+if data ! empty then the modal will appear that shows delivery history columns and related data
+

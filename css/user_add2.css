@@ -144,6 +144,18 @@ i.mainMenuIconArrow{
     background: #f690bf;
 }
 
+.deliveryBtn{    
+    color: black;
+    background: #ffff;
+    border: 1px solid #ffff;
+    padding: 2px 20px;
+    margin-top: 6px;
+    border-radius: 5px
+}
+.deliveryBtn:hover{
+    color: white;
+    background: #1b05e6;
+}
 .po-badge{
     padding: 1px 20px;
 }
@@ -181,3 +193,4 @@ div.charts{
     flex-direction: row;
     /* border: solid red 2px; */
 }
+

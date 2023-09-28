@@ -72,6 +72,7 @@ $response_message = '';
                                                             <th>nu</th>
                                                             <th>Image</th>
                                                             <th>Product Name</th>
+                                                            <th>Stock Available</th>
                                                             <th>Description</th>
                                                             <th>Supplier</th>
                                                             <th>created by</th>
@@ -93,6 +94,7 @@ $response_message = '';
                                                                 <img class="productImages" src= "uploads/products/<?= $product['img'] ?>" alt=""/>
                                                                 </td>
                                                                 <td class="lastName"><?= $product['product_name'] ?></td>
+                                                                <td class="lastName"><?= $product['stock'] ?></td>
                                                                 <td class="email"><?= $product['description'] ?></td>
                                                                 <td class="email">
                                                                     <?php
