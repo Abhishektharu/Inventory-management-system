@@ -8,9 +8,9 @@
             </div>
 
             <div class="navbar">
-                <a href="logout.php" style="color: white; margin-right: 30px">
+                <a href="logout.php" style="color: white; margin-right: 30px" id="logout">
                     <i class='bx bx-log-out' style="font-size: 20px"></i>
-                        Logout
+                    Logout
                 </a>
             </div>
         </div>

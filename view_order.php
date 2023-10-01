@@ -89,7 +89,7 @@ $response_message = '';
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h1 class="modal-title fs-5" id="exampleModalLabel">History of orders</h1>
-                                                        <button type="bgiutton" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="table table-bordered history_modal ">
                                                         No records were found...
@@ -238,6 +238,7 @@ $response_message = '';
 
                 if (classList.contains('updatePoBtn')) {
                     e.preventDefault();
+                    
 
                     batchNumber = targetElement.dataset.id;
                     batchNumberContainer = 'container-' + targetElement.dataset.id;
@@ -358,7 +359,7 @@ $response_message = '';
                             // Now productList contains both productData and pid values for each row
 
 
-                            console.log(productList);
+                            // console.log(productList);
 
                             var jsonData = JSON.stringify(poListsArrForm);
 

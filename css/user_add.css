@@ -100,12 +100,12 @@ body {
 
 }
 
-.wrapper .section .top_navbar .hamburger a {
+.wrapper .section .top_navbar .hamburgera {
     font-size: 28px;
     color: #f4fbff;
 }
 
-.wrapper .section .top_navbar .hamburger a:hover {
+.wrapper .section .top_navbar .hamburgera:hover {
     color: #a2ecff;
 }
 

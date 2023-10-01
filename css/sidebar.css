@@ -101,13 +101,13 @@ body {
     padding: 0 30px;
 }
     
-.wrapper .section .top_navbar .hamburger a {
+.wrapper .section .top_navbar .hamburgera {
     font-size: 28px;
     padding-right: 10px;
     color: #f4fbff;
 }
     
-.wrapper .section .top_navbar .hamburger a:hover {
+.wrapper .section .top_navbar .hamburgera:hover {
     color: #a2ecff;
 }
     
@@ -127,15 +127,6 @@ body.active .wrapper .section {
     color: green;
 }
     
-.wrapper .section .top_navbar .navbar .logout {
-    color: red;
-    /* display: flex;
-        flex-direction: row;
-        font-size: 30px;
-        border: 2px solid black;
-        align-items: end;
-        float: right; */
-}
     
     
     

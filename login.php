@@ -6,78 +6,23 @@ $error_message = '';
 if ($_POST) {
     include('connection.php');
 
-    $username = $_POST['username'];
+    $email = $_POST['email'];
     $password = $_POST['password'];
-    // $password = $_POST['password'];
 
-    $query = 'SELECT * FROM users WHERE users.email="'. $username .'" AND users.password="'. $password .'"';
-    // $stmt = $conn->prepare($query);
+    $query = 'SELECT * FROM users WHERE users.email="' . $email . '" AND users.password="' . $password . '"';
 
-    // $stmt->execute();
-    // $stmt->setFetchMode(PDO::FETCH_ASSOC);
-
-    // $users = $stmt->fetchAll();
-
-
-
-    // $user_exist = false;
-    // foreach ($users as $user) {
-
-    //     $upass = $user['password'];
-    //     if (password_verify($password, $upass)) {
-    //         $user_exist = true;
-    //         $_SESSION['user'] = $user;
-    //         break;
-    //     }
-    // }
-
-    // if($user_exist) 
-    // {
-    //     header('Location: dashboard.php');
-    // }
-
-    // else 
-    // {
-    //     $error_message = 'Please enter correct username or password.';
-    // }
-
-    // if($stmt -> rowCount() > 0){
-    //     $stmt->setFetchMode(PDO::FETCH_ASSOC);
-    //     $user = $stmt->fetchAll()[0];
-    //     $_SESSION['user'] = $user;
-
-    //     header('Location: dashboard.php');
-    // }
-    // else{
-    //     $error_message = 'please insert correct username and password';
-    // }
-
-    $stmt = $conn->prepare("SELECT * FROM users");
+    $stmt = $conn->prepare("SELECT * FROM users WHERE email = :email");
+    $stmt->bindParam(':email', $email);
     $stmt->execute();
-    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    $users = $stmt->fetchAll();
-
-    $user_exist = false;
-    foreach ($users as $user) {
-        $upass = $user['password'];
-
-        if (password_verify($password, $upass)) {
-            $user_exist = true;
-            //current session user
-            $_SESSION['user'] = $user;
-            break;
-        }
-    }
-
-    if($user_exist) 
-    {
+    if ($user && password_verify($password, $user['password'])) {
+        // Password is correct; set the user session
+        $_SESSION['user'] = $user;
         header('Location: dashboard.php');
-    }
-
-    else 
-    {
-        $error_message = 'Please enter correct username or password.';
+        exit;
+    } else {
+        $error_message = 'Please enter correct email or password.';
     }
 }
 ?>
@@ -118,8 +63,8 @@ if ($_POST) {
             <div class="text">Login</div>
             <form action="login.php" method="post">
                 <div class="input">
-                    <label for="username">email</label>
-                    <input type="text" name="username" placeholder="username" required >
+                    <label for="email">email</label>
+                    <input type="text" name="email" placeholder="email" required>
                 </div>
 
                 <div class="input">
@@ -131,9 +76,9 @@ if ($_POST) {
                     <button type="submit" class="btn" name="login">Login</button>
                 </div>
 
-               <div class="back-login">
+                <div class="back-login">
                     <a href="homepage.php" class="hover-back-login"> BACK</a>
-               </div>
+                </div>
 
             </form>
 
@@ -141,4 +86,5 @@ if ($_POST) {
 
     </div>
 </body>
+
 </html>
