@@ -235,10 +235,12 @@ $response_message = '';
 
                 targetElement = e.target; //target element
                 classList = targetElement.classList; // returns class
-
+                
                 if (classList.contains('updatePoBtn')) {
                     e.preventDefault();
-                    
+                    $('.table_data').empty();
+
+
 
                     batchNumber = targetElement.dataset.id;
                     batchNumberContainer = 'container-' + targetElement.dataset.id;

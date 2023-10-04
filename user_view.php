@@ -210,9 +210,9 @@ $response_message = '';
                                 success: function(data) {
                                     //from delete_user success = true;
                                     json_decode('data');
-                                    if (data.success === 'true') {
-                                            location.reload();
-                                        
+                                    if (data.success) {
+                                        location.reload();
+
                                     } else window.alert(data.message);
                                 }
                             })
@@ -240,7 +240,7 @@ $response_message = '';
                             var fname = $('#edit_fname').val();
                             var lname = $('#edit_lname').val();
                             var email = $('#edit_email').val();
-                            if ( email != '', fname != '' & lname != '') {
+                            if (email != '', fname != '' & lname != '') {
                                 $.ajax({
                                     type: 'POST',
                                     url: "database/updateuser.php",
