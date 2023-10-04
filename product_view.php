@@ -87,7 +87,7 @@ $response_message = '';
 
 
             <!-- container main -->
-            <div class="container">
+            <div class="containerMain">
 
 
                 <div class="dashboard_content_main">

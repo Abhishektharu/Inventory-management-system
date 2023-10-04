@@ -1,3 +1,6 @@
+#slider{
+    background: white;
+}
 /* for table */
 div.row {
     display: flex;
@@ -17,8 +20,12 @@ div.column-5 {
 
 div.column-7 {
     width: 100%;
-}
+    margin-left: 20px;
 
+}
+.dashboard_content_main {
+    background: #5b54502b;
+}
 h1.section_header {
     font-size: 21px;
     color: rgb(5, 80, 5);
