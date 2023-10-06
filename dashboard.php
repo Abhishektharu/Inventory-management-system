@@ -163,7 +163,7 @@ include('database/supplier_bar_chart.php');
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'Supplier Count'
+                    text: 'Total No Of Products'
                 }
             },
             tooltip: {
