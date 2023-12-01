@@ -264,13 +264,21 @@ $response_message = '';
                             url: 'database/delete.php',
                             dataType: 'json',
                             success: function(data) {
-                                if (data.success) {
-                                    if (window.confirm(data.message)) {
+                                if (data.success === true) {
+                                    prompt("deleted");
+                                    alert("delete");
+                                    if (window.confirm(data.message === true)) {
                                         location.reload();
+                                        prompt("deleted");
+                                        alert("delete")
+
                                     }
+                                    location.reload();
                                 } else window.alert(data.message);
                             }
                         })
+
+                        
                     } else {
                         console.log("not delete");
                     }
@@ -306,8 +314,8 @@ $response_message = '';
                                     },
                                     success: function(response) {
                                         $('#editmodal').modal('hide');
-                                        // location.reload();
-                                        console.log(response);
+                                        location.reload();
+                                        // console.log(response);
                                     }
                                 });
                             } else {

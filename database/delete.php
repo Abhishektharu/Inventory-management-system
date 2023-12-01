@@ -1,36 +1,35 @@
 <!-- contains ajax or list of users delete operations -->
 <?php
-    $data = $_POST;
-    $id = (int) $data['id'];
-    $table = $data['table'];
+$data = $_POST;
+$id = (int) $data['id'];
+$table = $data['table'];
 
 
 
-    try{    
-        include('connection.php');
+try {
+    include('connection.php');
 
-        //for foreign key supplier to product_supplier table
-        if($table === 'suppliers'){
-            $suppplier_id = $id;
-            $command = "DELETE FROM $table WHERE id= {$id}";
-            $conn-> exec($command);
-        }
-
+    //for foreign key supplier to product_supplier table
+    if ($table === 'suppliers') {
+        $suppplier_id = $id;
         $command = "DELETE FROM $table WHERE id= {$id}";
-            
+        $conn->exec($command);
+    }
 
-            $conn->exec($command);
+    $command = "DELETE FROM $table WHERE id= {$id}";
 
-            echo json_encode([
-                'success' => true,
-            ]);
-        }
 
-        catch(PDOException $e){
-            echo json_encode([
-                'success' => false, 
-                'message' => 'Error processing your request.'
-            ]);
-        }
+    $conn->exec($command);
+    $return = "successfull delete";
+
+    echo json_encode([
+        'success' => true,
+        'message' => true,
+    ]);
+} catch (PDOException $e) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'Error processing your request.'
+    ]);
+}
 ?>
-

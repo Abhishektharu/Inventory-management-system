@@ -419,9 +419,8 @@ $response_message = '';
                                 <tbody>' + rows + '</tbody>\
                             '
                             $historyModal.append(history_modal_body);
+                            
                             // console.log(data);
-                        } else {
-                            // alert('No delivery records found');
                         }
                     }, 'json');
                 }

@@ -9,7 +9,7 @@
     //extract product columns from session
     $table_name = $_SESSION['table'];
     $columns = $table_columns_mapping[$table_name];
-    var_dump($table_name);
+    // var_dump($table_name);
 
 
     //loop through the columns
