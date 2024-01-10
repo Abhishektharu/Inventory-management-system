@@ -17,7 +17,7 @@ product_name varchar(50),
 
 description varchar(50) ,
 img varchar(50) ,
-stocks INTEGER,
+stocks int,
 created_by varchar(50),
 created_at DateTime,
 updated_at DateTime
