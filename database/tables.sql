@@ -44,29 +44,29 @@ id int primary key auto_increment,
 supplier_name varchar(50),
 supplier_location varchar(50),
 email varchar(50),
-created_by varchar(50),
+created_by int,
 created_at DateTime,
-updated_at DateTime
+updated_at DateTime,
 
-foreign key(created_by) references users(id)
+FOREIGN key(created_by) references users(id)
 );
 
 create table order_product(
     id INTEGER,
-    supplier INTEGER,
-    product INTEGER,
+    supplier int,
+    product int,
     quantity_ordered INTEGER,
     quantity_received INTEGER,
     quantity_remaining INTEGER,
     status varchar(20),
     batch int,
-    created_by INTEGER,
+    created_by int,
     created_at DateTime,
     updated_at DateTime,
     
     
      PRIMARY key(id),
-     FOREIGN KEY(supplier) REFERENCES supplier(id),
+     FOREIGN KEY(supplier) REFERENCES suppliers(id),
      FOREIGN KEY(product) REFERENCES products(id),
     FOREIGN KEY(created_by) REFERENCES products(id)
     
@@ -83,13 +83,13 @@ create table product_suppliers(
 ;
 
 
-create table order_product_history{
+create table order_product_history(
     id INTEGER,
     order_product_id int,
     qty_received int ,
     date_received DateTime,
-    date_updated DateTime
+    date_updated DateTime,
 
     PRIMARY key(id),
      FOREIGN KEY(order_product_id) REFERENCES order_product(id)
-}
+)

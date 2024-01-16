@@ -1,4 +1,0 @@
-name of product
-supplier from product_supplier table
-quantity ordered
-who ordered based on current login user

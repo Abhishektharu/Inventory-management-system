@@ -79,6 +79,9 @@ if ($_POST) {
                 <div class="back-login">
                     <a href="homepage.php" class="hover-back-login"> BACK</a>
                 </div>
+                <div class="register">
+                    <a href="register.php">register here.</a>
+                </div>
 
             </form>
 
