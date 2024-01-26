@@ -18,27 +18,13 @@ product_name varchar(50),
 description varchar(50) ,
 img varchar(50) ,
 stock int,
-created_by varchar(50),
+created_by int,
 created_at DateTime,
-updated_at DateTime
+updated_at DateTime,
 
+FOREIGN key(created_by) references users(id)
 );
 
-
-CREATE TABLE stocks(
-    id INTEGER,
-    product_id int,
-    created_by INTEGER,
-    quantity INTEGER,
-    created_at DATETIME,
-    updated_at DATETIME,
-    
-    
-    PRIMARY KEY(id),
-    foreign key(product_id) references products(id),
-    FOREIGN KEY(created_by) REFERENCES users(id)
-    
-);
 create table suppliers(
 id int primary key auto_increment,
 supplier_name varchar(50),
@@ -52,7 +38,7 @@ FOREIGN key(created_by) references users(id)
 );
 
 create table order_product(
-    id INTEGER,
+    id INTEGER auto_increment,
     supplier int,
     product int,
     quantity_ordered INTEGER,
@@ -84,7 +70,7 @@ create table product_suppliers(
 
 
 create table order_product_history(
-    id INTEGER,
+    id INTEGER auto_increment,
     order_product_id int,
     qty_received int ,
     date_received DateTime,
