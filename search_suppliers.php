@@ -1,18 +1,24 @@
 <?php
-//start the session.
 session_start();
+require 'db_connection.php';  // Include your database connection
 
-if (!isset($_SESSION['user'])) header('Location: login.php');
+$supplier = null; // Initialize supplier variable
 
-$show_table = 'products';
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = isset($_POST['name']) ? $_POST['name'] : '';
 
-
-// $products = include('database/show.php');
-$products = include('database/show.php');
-// var_dump($products);
-// die;
-
-$response_message = '';
+    // Prepare SQL query with placeholders
+    $sql = "SELECT * FROM suppliers WHERE supplier_name LIKE :name";
+    $stmt = $pdo->prepare($sql);
+    
+    // Execute with bound parameters
+    $stmt->execute([
+        ':name' => '%' . $name . '%'
+    ]);
+    
+    // Fetch the supplier details
+    $supplier = $stmt->fetch(PDO::FETCH_ASSOC);
+}
 ?>
 
 <!DOCTYPE html>
@@ -36,6 +42,64 @@ $response_message = '';
             height: 25px;
             width: 25px;
             border-radius: 5px;
+        }
+    </style>
+
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background: #007bff;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: #fff;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background: #f2f2f2;
+        }
+        tr:hover {
+            background: #f9f9f9;
+        }
+        .no-results {
+            color: #ff0000;
         }
     </style>
 
@@ -90,134 +154,48 @@ $response_message = '';
             <!-- container main -->
             <div class="containerMain">
 
+<h2>Search Supplier by Name</h2>
+<form method="POST">
+    <label for="name">Supplier Name:</label>
+    <input type="text" id="name" name="name" required>
+    
+    <button type="submit">Search</button>
+</form>
 
-                <div class="dashboard_content_main">
-                    <div class="userAddFormContainer">
+<h3>Supplier Details:</h3>
+<?php if ($supplier): ?>
+    <table>
+        <tr>
+            <th>ID</th>
+            <td><?php echo $supplier['id']; ?></td>
+        </tr>
+        <tr>
+            <th>Name</th>
+            <td><?php echo htmlspecialchars($supplier['supplier_name']); ?></td>
+        </tr>
+        <tr>
+            <th>Location</th>
+            <td><?php echo htmlspecialchars($supplier['supplier_location']); ?></td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td><?php echo htmlspecialchars($supplier['email']); ?></td>
+        </tr>
+        <tr>
+            <th>Created At</th>
+            <td><?php echo $supplier['created_at']; ?></td>
+        </tr>
+        <tr>
+            <th>Updated At</th>
+            <td><?php echo $supplier['updated_at']; ?></td>
+        </tr>
+    </table>
+<?php elseif ($_SERVER["REQUEST_METHOD"] == "POST"): ?>
+    <p class="no-results">No supplier found with the name "<?php echo htmlspecialchars($name); ?>".</p>
+<?php endif; ?>
 
-
-                        <div class="dashboard_content">
-                            <div class="dashboard_content_main">
-                                <div class="row">
-                                    <div class="column-7">
-                                        <h1 class="section_header"><i class="fa fa-list"></i> List of Products</h1>
-                                        <div class="section_content">
-                                            <div class="users">
-                                                <table>
-                                                    <thead>
-
-                                                        <tr>
-                                                            <th>nu</th>
-                                                            <th>Image</th>
-                                                            <th>Product Name</th>
-                                                            <th>Stock Available</th>
-                                                            <th>Description</th>
-                                                            <th>Supplier</th>
-                                                            <th>created by</th>
-                                                            <th>Created At</th>
-                                                            <th>Updated At</th>
-                                                            <th>Option</th>
-                                                        </tr>
-                                                    </thead>
-
-                                                    <!-- table body of add users  -->
-                                                    <tbody>
-                                                        <?php foreach ($products as $index => $product) {
-                                                        ?>
-                                                            <tr>
-                                                                <td><?= $index + 1 ?></td>
-                                                                <!-- //image section  -->
-                                                                <td class="firstName">
-                                                                    <img class="productImages" src="uploads/products/<?= $product['img'] ?>" alt="" />
-                                                                </td>
-                                                                <td class="lastName"><?= $product['product_name'] ?></td>
-                                                                <td class="lastName"><?= $product['stock'] ?></td>
-                                                                <td class="email"><?= $product['description'] ?></td>
-                                                                <td class="email">
-                                                                    <?php
-
-                                                                    $supplier_list = '-';
-
-                                                                    $pid = $product['id'];
-                                                                    $stmt = $conn->prepare("SELECT supplier_name FROM suppliers, product_suppliers WHERE product_suppliers.product = $pid AND product_suppliers.supplier = suppliers.id");
-                                                                    $stmt->execute();
-                                                                    $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                                                                    if ($row) {
-                                                                        $supplier_arr = array_column($row, 'supplier_name');
-                                                                        $supplier_list = '<li>' . implode("</li><li>", $supplier_arr);
-                                                                    }
-                                                                    echo $supplier_list;
-
-                                                                    ?>
-                                                                </td>
-
-                                                                <td>
-
-                                                                    <?php
-                                                                    $uid = $product['created_by'];
-                                                                    $stmt = $conn->prepare("SELECT * FROM users WHERE id = :uid");
-                                                                    $stmt->bindParam(':uid', $uid);
-                                                                    $stmt->execute();
-
-                                                                    if ($stmt->rowCount() > 0) {
-                                                                        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                                                                        $created_by_name = $row['first_name'] . ' ' . $row['last_name'];
-                                                                        echo $created_by_name;
-                                                                    } else {
-                                                                        echo "User not found";
-                                                                    }
-                                                                    ?>
-
-                                                                </td>
-
-                                                                <!-- set month day year using php  -->
-                                                                <td><?= date('M d, Y @ h:i:s A', strtotime($product['created_at'])) ?></td>
-                                                                <td><?= date('M d, Y @ h:i:s A', strtotime($product['updated_at'])) ?></td>
-
-
-                                                                <!-- adding edit and delete option` -->
-                                                                <td>
-                                                                    <!-- <a href=""><i class="fa fa-pencil"></i>Edit</a> -->
-                                                                    <!-- <button type="button" data-userid="<?= $user['id'] ?>" class="btn btn-success updateUser editbtn">edit</button> -->
-                                                                    <button type="button" data-pid="<?= $product['id'] ?>" class="btn btn-success updateUser editbtn">edit</button>
-
-
-                                                                    <a href="" class="deleteProduct" data-name="<?= $product['product_name'] ?>" data-pid="<?= $product['id'] ?>"> <i class="fa fa-trash"></i>Delete</a>
-                                                                </td>
-
-                                                            </tr>
-                                                        <?php } ?>
-                                                    </tbody>
-                                                </table>
-                                                <p class="userCount"><?= count($products) ?> Products </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-                <?php
-                if (isset($_SESSION['response'])) {
-                    $response_message = $_SESSION['response']['message'];
-                    $is_success = $_SESSION['response']['success'];
-                }
-                ?>
-
-                <div class="responseMessage">
-                    <p class="<?= $is_success ? 'responseMessage_success' : 'responseMessage_error' ?>">
-                        <?= $response_message ?>
-                    </p>
-                </div>
-
-                <?php unset($_SESSION['response']); ?>
-            </div>
-
-        </div>
-
+</body>
+    
         <!-- side bar or nav bar out of section and inside of wrapper -->
         <?php
         include('partials/app_sidebar.php');

@@ -1,5 +1,6 @@
 create database inventory;
 use inventory;
+
 create table users(
 id int primary key auto_increment,
 first_name varchar(50),
@@ -54,7 +55,7 @@ create table order_product(
      PRIMARY key(id),
      FOREIGN KEY(supplier) REFERENCES suppliers(id),
      FOREIGN KEY(product) REFERENCES products(id),
-    FOREIGN KEY(created_by) REFERENCES products(id)
+    FOREIGN KEY(created_by) REFERENCES users(id)
     
     )
 ;

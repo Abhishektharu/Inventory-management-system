@@ -65,11 +65,7 @@ include('database/supplier_bar_chart.php');
                             <figure class="highcharts-figure">
                                 <div id="containerBarChart"></div>
                                 <p class="highcharts-description">
-                                    A basic column chart comparing estimated corn and wheat production
-                                    in some countries.
-
-                                    The chart is making use of the axis crosshair feature, to highlight
-                                    the hovered country.
+                                    
                                 </p>
                             </figure>
 

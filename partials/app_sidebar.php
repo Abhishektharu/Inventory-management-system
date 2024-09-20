@@ -80,6 +80,34 @@
         </li>
 
 
+        <li class="liMainMenu showHideSubMenu" >
+            <a href="javascript:void(0);" class="showHideSubMenu" >
+                <span class="icon"><i class="fas fa-search showHideSubMenu" ></i></span>
+                <span class="showHideSubMenu">Search</span>
+                <i class="fa fa-angle-down mainMenuIconArrow showHideSubMenu" ></i>
+            </a>
+            <ul class="subMenus" >
+                <li><a class="subMenuLink" href="./search_products.php"><i class="fa fa-circle"></i> Search Product</a></li>
+                <li><a class="subMenuLink" href="./search_suppliers.php"><i class="fa fa-circle"></i> Search Supplier</a></li>
+            </ul>
+        </li>
+        
+        <li class="liMainMenu showHideSubMenu" >
+            <a href="javascript:void(0);" class="showHideSubMenu" >
+                <span class="icon"><i class="fas fa-arrow-up showHideSubMenu" ></i></span>
+                <span class="icon"><i class="fas fa-arrow-down showHideSubMenu" ></i></span>
+                <span class="showHideSubMenu">Sort</span>
+                <i class="fa fa-angle-down mainMenuIconArrow showHideSubMenu" ></i>
+            </a>
+            <ul class="subMenus" >
+                <li><a class="subMenuLink" href="./sort_suppliers.php"><i class="fa fa-circle"></i> Sort Supplier</a></li>
+                <li><a class="subMenuLink" href="./stock_range.php"><i class="fa fa-circle"></i> Stock Range</a></li>
+            </ul>
+        </li>
+
+
+
+
     </ul>
 </div>
 
