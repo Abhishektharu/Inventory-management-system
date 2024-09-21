@@ -106,6 +106,13 @@
         </li>
 
 
+        <li>
+            <a href="./supplier_map.php" class="btn">
+                <span class="icon"><i class="fas fa-map"></i></span>
+                <span class="item">Map</span>
+            </a>
+        </li>
+
 
 
     </ul>

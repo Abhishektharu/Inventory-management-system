@@ -79,4 +79,16 @@ create table order_product_history(
 
     PRIMARY key(id),
      FOREIGN KEY(order_product_id) REFERENCES order_product(id)
-)
+);
+
+CREATE TABLE supplier_coordinates (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    supplier_id INT,
+    supplier_location VARCHAR(255),
+    latitude DECIMAL(10, 8),
+    longitude DECIMAL(11, 8),
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (supplier_id) REFERENCES suppliers(id)
+);
+
